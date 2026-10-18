@@ -15,5 +15,3 @@ Open `index.html` locally to preview. No installation or build is required.
 ## Publish
 
 In GitHub: **Settings → Pages → Deploy from a branch → main → / (root) → Save**.
-
-Team photos and final role assignments are still pending.
