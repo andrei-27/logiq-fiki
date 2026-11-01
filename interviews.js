@@ -1,14 +1,19 @@
 'use strict';
 
-// Google Form responses, read from the response sheet published as CSV. interviews.html shows one
-// collapsible entry per consented response (#response-<id> opens one); M2 on index.html lists the
-// respondents with links to those entries.
+// Google Form responses, read live from the response sheet published as CSV (re-read every two
+// minutes and whenever the tab becomes visible). interviews.html shows one collapsible entry per
+// consented response (#response-<id> opens one); findings.html lists every respondent with the
+// team's summary, or marks the response as new until it has been reviewed.
 const responseFeedUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4MmRmc0AGn-9r2FPGD1cXoxYTsavpeh1iqycy8k1IHjdfFQ2_KYfOemNDMt9aBmypl3E4C02GM012/pub?gid=177077202&single=true&output=csv';
 const publicConsent = 'I consent to public display of my full response on the LogiQ Fiki website.';
 // Submitted before the form asked for consent; approved individually. Only the first row with
 // each tag counts, so a later submission reusing the name still needs the consent box.
 const legacyApprovedTags = new Set(['matias']);
 const recordedInterviews = { gabi: './transcripts/gabi.html', baldo: './transcripts/baldo.html' };
+// Team-written summaries of reviewed survey responses, keyed by response id (as in #response-<id>).
+// Responses without an entry are shown as new and not yet reviewed.
+const reviewedSummaries = {};
+const refreshInterval = 2 * 60 * 1000;
 
 const responseList = document.getElementById('response-list');
 const responseStatus = document.getElementById('response-status');
@@ -62,27 +67,28 @@ function parseResponses(csvText) {
   const occupationIndex = column(/occupation|field of study/i);
   const tagIndex = column(/participant name or tag/i);
   const consentIndex = column(/consent to public display/i);
-  const firstAnswerIndex = column(/online claim or argument/i);
-  if (tagIndex < 0 || consentIndex < 0 || firstAnswerIndex < 0) {
-    throw new Error('The response sheet no longer has the expected name, consent and question columns.');
-  }
-  const lastAnswerIndex = consentIndex > firstAnswerIndex ? consentIndex : headers.length;
-  const answerIndexes = [];
-  for (let index = firstAnswerIndex; index < lastAnswerIndex; index += 1) {
-    if (![timestampIndex, ageIndex, occupationIndex, tagIndex].includes(index)) answerIndexes.push(index);
-  }
+  if (consentIndex < 0) throw new Error('The response sheet no longer has the public-display consent column.');
+  // Every other column is an answer, so questions added to the form later are never dropped.
+  // Email addresses are never shown.
+  const metadataIndexes = new Set([timestampIndex, ageIndex, occupationIndex, tagIndex, consentIndex]);
+  const answerIndexes = headers.map((header, index) => index)
+    .filter((index) => !metadataIndexes.has(index) && !/e-?mail/i.test(headers[index]));
 
   const seenTags = new Set();
   const usedIds = new Map();
   const responses = [];
+  let hidden = 0;
   for (const row of rows) {
     const cell = (index) => (index >= 0 ? normalize(row[index]) : '');
-    const tag = cell(tagIndex);
+    const tag = cell(tagIndex) || 'Anonymous respondent';
     const key = slugify(tag);
-    const isFirstWithTag = tag && !seenTags.has(key);
+    const isFirstWithTag = cell(tagIndex) && !seenTags.has(key);
     seenTags.add(key);
     const consented = cell(consentIndex) === publicConsent || (isFirstWithTag && legacyApprovedTags.has(key));
-    if (!tag || !consented || cell(ageIndex) === 'Under 18') continue;
+    if (!consented || cell(ageIndex) === 'Under 18') {
+      hidden += 1;
+      continue;
+    }
 
     const count = (usedIds.get(key) || 0) + 1;
     usedIds.set(key, count);
@@ -96,23 +102,35 @@ function parseResponses(csvText) {
       answers: answerIndexes.map((index) => ({ question: normalize(headers[index]), answer: (row[index] || '').trim() }))
     });
   }
-  return responses;
+  return { responses, hidden };
 }
 
-// M2 findings: one line per consented respondent, linking to their answers on interviews.html.
+// findings.html: every consented respondent, with the team's summary once the response is reviewed.
 function renderSurveyFindings(responses) {
   if (!surveyFindings) return;
   if (!responses.length) {
-    surveyFindings.replaceChildren(makeTextElement('li', '', 'No consented survey responses yet.'));
+    surveyFindings.replaceChildren(makeTextElement('p', 'small-note', 'No consented survey responses yet.'));
     return;
   }
   surveyFindings.replaceChildren(...responses.map((response) => {
-    const item = document.createElement('li');
-    item.append(makeLink('', `./interviews.html#response-${response.id}`, response.tag));
-    const metadata = [response.age, response.occupation].filter(Boolean).join(' · ');
-    if (metadata) item.append(` (${metadata})`);
-    item.append(' — full answers on the Interviews page.');
-    return item;
+    const entry = document.createElement('article');
+    entry.className = 'survey-finding';
+    const heading = makeTextElement('h3', '', response.tag);
+    const summary = reviewedSummaries[response.id];
+    heading.append(makeTextElement('span', summary ? 'review-badge review-badge-done' : 'review-badge', summary ? 'Reviewed' : 'New response · not yet reviewed'));
+    entry.append(heading);
+    const metadata = [response.age, response.occupation, response.timestamp && `submitted ${response.timestamp}`].filter(Boolean).join(' · ');
+    if (metadata) entry.append(makeTextElement('p', 'response-metadata', metadata));
+    if (summary) {
+      const list = document.createElement('ul');
+      list.className = 'evidence-list';
+      list.append(...summary.map((point) => makeTextElement('li', '', point)));
+      entry.append(list);
+    } else {
+      entry.append(makeTextElement('p', 'small-note', 'This response appeared automatically and has not been summarised yet.'));
+    }
+    entry.append(makeLink('text-link', `./interviews.html#response-${response.id}`, 'Read the full answers →'));
+    return entry;
   }));
 }
 
@@ -163,26 +181,49 @@ function openRequestedResponse() {
   item.querySelector('summary').focus({ preventScroll: true });
 }
 
+function renderResponseList(responses, hidden) {
+  if (!responseList) return;
+  const openIds = new Set([...responseList.querySelectorAll('details[open]')].map((item) => item.id));
+  const headingLevel = Number(responseList.dataset.headingLevel) || 3;
+  responseList.replaceChildren(...responses.map((response) => {
+    const item = createResponseItem(response, headingLevel);
+    item.open = openIds.has(item.id);
+    return item;
+  }));
+  const shown = responses.length
+    ? `${responses.length} consented response${responses.length === 1 ? '' : 's'}. Select a name to read the answers.`
+    : 'No consented responses are available yet.';
+  responseStatus.textContent = hidden
+    ? `${shown} ${hidden} other response${hidden === 1 ? ' is' : 's are'} hidden because ${hidden === 1 ? 'it lacks' : 'they lack'} public-display consent or ${hidden === 1 ? 'is' : 'are'} from someone under 18.`
+    : shown;
+}
+
+let loadedOnce = false;
 async function loadResponses() {
   if (!responseList && !surveyFindings) return;
   try {
     const feed = await fetch(`${responseFeedUrl}&refresh=${Date.now()}`, { cache: 'no-store' });
     if (!feed.ok) throw new Error(`The response feed returned ${feed.status}.`);
-    const responses = parseResponses(await feed.text());
+    const { responses, hidden } = parseResponses(await feed.text());
     renderSurveyFindings(responses);
-    if (!responseList) return;
-    const headingLevel = Number(responseList.dataset.headingLevel) || 3;
-    responseList.replaceChildren(...responses.map((response) => createResponseItem(response, headingLevel)));
-    responseStatus.textContent = responses.length
-      ? `${responses.length} consented response${responses.length === 1 ? '' : 's'}. Select a name to read the answers.`
-      : 'No consented responses are available yet.';
-    openRequestedResponse();
-    window.addEventListener('hashchange', openRequestedResponse);
+    renderResponseList(responses, hidden);
+    if (!loadedOnce && responseList) {
+      openRequestedResponse();
+      window.addEventListener('hashchange', openRequestedResponse);
+    }
+    loadedOnce = true;
   } catch (error) {
-    if (responseStatus) responseStatus.textContent = 'Form responses could not be loaded right now. Please try again later.';
-    if (surveyFindings) surveyFindings.replaceChildren(makeTextElement('li', '', 'Survey responses could not be loaded right now.'));
+    // Keep what is already on screen if a background refresh fails.
+    if (!loadedOnce) {
+      if (responseStatus) responseStatus.textContent = 'Form responses could not be loaded right now. Please try again later.';
+      if (surveyFindings) surveyFindings.replaceChildren(makeTextElement('p', 'small-note', 'Survey responses could not be loaded right now.'));
+    }
     console.error(error);
   }
 }
 
 loadResponses();
+setInterval(loadResponses, refreshInterval);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') loadResponses();
+});
