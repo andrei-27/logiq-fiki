@@ -1,8 +1,8 @@
 'use strict';
 
-// Google Form responses, read from the response sheet published as CSV. Renders one collapsible
-// entry per consented response wherever #response-list exists (interviews.html and M2 on
-// index.html); interviews.html#response-<id> opens a single response.
+// Google Form responses, read from the response sheet published as CSV. interviews.html shows one
+// collapsible entry per consented response (#response-<id> opens one); M2 on index.html lists the
+// respondents with links to those entries.
 const responseFeedUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4MmRmc0AGn-9r2FPGD1cXoxYTsavpeh1iqycy8k1IHjdfFQ2_KYfOemNDMt9aBmypl3E4C02GM012/pub?gid=177077202&single=true&output=csv';
 const publicConsent = 'I consent to public display of my full response on the LogiQ Fiki website.';
 // Submitted before the form asked for consent; approved individually. Only the first row with
@@ -99,7 +99,7 @@ function parseResponses(csvText) {
   return responses;
 }
 
-// M2 findings: one line per consented respondent, linking to their answers on the same page.
+// M2 findings: one line per consented respondent, linking to their answers on interviews.html.
 function renderSurveyFindings(responses) {
   if (!surveyFindings) return;
   if (!responses.length) {
@@ -108,10 +108,10 @@ function renderSurveyFindings(responses) {
   }
   surveyFindings.replaceChildren(...responses.map((response) => {
     const item = document.createElement('li');
-    item.append(makeLink('', `#response-${response.id}`, response.tag));
+    item.append(makeLink('', `./interviews.html#response-${response.id}`, response.tag));
     const metadata = [response.age, response.occupation].filter(Boolean).join(' · ');
     if (metadata) item.append(` (${metadata})`);
-    item.append(' — full answers in the survey section.');
+    item.append(' — full answers on the Interviews page.');
     return item;
   }));
 }
@@ -164,21 +164,22 @@ function openRequestedResponse() {
 }
 
 async function loadResponses() {
-  if (!responseList || !responseStatus) return;
+  if (!responseList && !surveyFindings) return;
   try {
     const feed = await fetch(`${responseFeedUrl}&refresh=${Date.now()}`, { cache: 'no-store' });
     if (!feed.ok) throw new Error(`The response feed returned ${feed.status}.`);
     const responses = parseResponses(await feed.text());
+    renderSurveyFindings(responses);
+    if (!responseList) return;
     const headingLevel = Number(responseList.dataset.headingLevel) || 3;
     responseList.replaceChildren(...responses.map((response) => createResponseItem(response, headingLevel)));
     responseStatus.textContent = responses.length
       ? `${responses.length} consented response${responses.length === 1 ? '' : 's'}. Select a name to read the answers.`
       : 'No consented responses are available yet.';
-    renderSurveyFindings(responses);
     openRequestedResponse();
     window.addEventListener('hashchange', openRequestedResponse);
   } catch (error) {
-    responseStatus.textContent = 'Form responses could not be loaded right now. Please try again later.';
+    if (responseStatus) responseStatus.textContent = 'Form responses could not be loaded right now. Please try again later.';
     if (surveyFindings) surveyFindings.replaceChildren(makeTextElement('li', '', 'Survey responses could not be loaded right now.'));
     console.error(error);
   }
