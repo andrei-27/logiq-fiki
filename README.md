@@ -11,6 +11,9 @@ One-page project journal for LogiQ, a critical-thinking copilot concept.
 - `script.js` — illustrative argument examples.
 - `transcripts/` — interview transcripts linked from M2; `transcript.js` makes their timestamps play the recording.
 - `serve.py` — local preview server.
+- `interviews.html`, `findings.html`, `interviews.js` — interviews and live Google Form responses.
+- `assets/survey/responses-csv-link.txt` — the published CSV of form responses; `interviews.js` reads the feed address from this file.
+- `assets/survey/form-link.txt` — the Google Form link. If it changes, also update the "Open the online survey" links in `index.html` and `interviews.html`.
 
 ## Preview
 

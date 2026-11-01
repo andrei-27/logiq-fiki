@@ -4,7 +4,8 @@
 // minutes and whenever the tab becomes visible). interviews.html shows one collapsible entry per
 // consented response (#response-<id> opens one); findings.html lists every respondent with the
 // team's summary, or marks the response as new until it has been reviewed.
-const responseFeedUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4MmRmc0AGn-9r2FPGD1cXoxYTsavpeh1iqycy8k1IHjdfFQ2_KYfOemNDMt9aBmypl3E4C02GM012/pub?gid=177077202&single=true&output=csv';
+// The published CSV address lives in this file, so the feed can be changed without editing code.
+const responseFeedLinkFile = './assets/survey/responses-csv-link.txt';
 const publicConsent = 'I consent to public display of my full response on the LogiQ Fiki website.';
 // Submitted before the form asked for consent; approved individually. Only the first row with
 // each tag counts, so a later submission reusing the name still needs the consent box.
@@ -59,6 +60,8 @@ function parseCsv(text) {
   return rows.filter((cells) => cells.some((cell) => cell.trim()));
 }
 
+const isUntitledColumn = (header) => !header || /^column \d+$/i.test(header);
+
 function parseResponses(csvText) {
   const [headers = [], ...rows] = parseCsv(csvText);
   const column = (pattern) => headers.findIndex((header) => pattern.test(header));
@@ -99,7 +102,11 @@ function parseResponses(csvText) {
       timestamp: cell(timestampIndex),
       age: cell(ageIndex),
       occupation: cell(occupationIndex),
-      answers: answerIndexes.map((index) => ({ question: normalize(headers[index]), answer: (row[index] || '').trim() }))
+      answers: answerIndexes.map((index) => ({ header: normalize(headers[index]), answer: (row[index] || '').trim() }))
+        // Columns without a question title (blank, or Google's "Column 12" placeholders) are left out
+        // when empty and labelled "Additional answer" if they hold something, so nothing is lost.
+        .filter(({ header, answer }) => !isUntitledColumn(header) || answer)
+        .map(({ header, answer }) => ({ question: isUntitledColumn(header) ? 'Additional answer' : header, answer }))
     });
   }
   return { responses, hidden };
@@ -199,10 +206,22 @@ function renderResponseList(responses, hidden) {
 }
 
 let loadedOnce = false;
+let responseFeedUrl = '';
+async function readFeedUrl() {
+  if (responseFeedUrl) return responseFeedUrl;
+  const linkFile = await fetch(new URL(responseFeedLinkFile, document.querySelector('script[src$="interviews.js"]')?.src || window.location.href), { cache: 'no-cache' });
+  if (!linkFile.ok) throw new Error(`The response feed link file returned ${linkFile.status}.`);
+  const url = (await linkFile.text()).trim();
+  if (!/^https:\/\/docs\.google\.com\//.test(url)) throw new Error('The response feed link file does not contain a Google Sheets address.');
+  responseFeedUrl = url;
+  return url;
+}
+
 async function loadResponses() {
   if (!responseList && !surveyFindings) return;
   try {
-    const feed = await fetch(`${responseFeedUrl}&refresh=${Date.now()}`, { cache: 'no-store' });
+    const feedUrl = await readFeedUrl();
+    const feed = await fetch(`${feedUrl}${feedUrl.includes('?') ? '&' : '?'}refresh=${Date.now()}`, { cache: 'no-store' });
     if (!feed.ok) throw new Error(`The response feed returned ${feed.status}.`);
     const { responses, hidden } = parseResponses(await feed.text());
     renderSurveyFindings(responses);
