@@ -1,8 +1,8 @@
 'use strict';
 
-// Google Form responses, read from the response sheet published as CSV. Renders a card per
-// consented response wherever #response-list exists (interviews.html and M2 on index.html), and
-// a single response on interviews.html?response=<id>.
+// Google Form responses, read from the response sheet published as CSV. Renders one collapsible
+// entry per consented response wherever #response-list exists (interviews.html and M2 on
+// index.html); interviews.html#response-<id> opens a single response.
 const responseFeedUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4MmRmc0AGn-9r2FPGD1cXoxYTsavpeh1iqycy8k1IHjdfFQ2_KYfOemNDMt9aBmypl3E4C02GM012/pub?gid=177077202&single=true&output=csv';
 const publicConsent = 'I consent to public display of my full response on the LogiQ Fiki website.';
 // Submitted before the form asked for consent; approved individually. Only the first row with
@@ -11,8 +11,8 @@ const legacyApprovedTags = new Set(['matias']);
 const recordedInterviews = { gabi: './transcripts/gabi.html', baldo: './transcripts/baldo.html' };
 
 const responseList = document.getElementById('response-list');
-const responseDetail = document.getElementById('response-detail');
 const responseStatus = document.getElementById('response-status');
+const surveyFindings = document.getElementById('survey-findings');
 
 const normalize = (text) => (text || '').replace(/\s+/g, ' ').trim();
 const slugify = (text) => normalize(text).normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -99,50 +99,68 @@ function parseResponses(csvText) {
   return responses;
 }
 
-function createResponseCard(response, headingLevel) {
-  const card = document.createElement('article');
-  card.className = 'response-card';
-  const heading = document.createElement(`h${headingLevel}`);
-  heading.append(makeLink('', `./interviews.html?response=${encodeURIComponent(response.id)}`, response.tag));
-  card.append(heading);
-  const metadata = [response.age, response.occupation].filter(Boolean).join(' · ');
-  if (metadata) card.append(makeTextElement('p', 'response-metadata', metadata));
-  const links = makeTextElement('p', 'response-card-links', '');
-  links.append(makeLink('response-card-link', `./interviews.html?response=${encodeURIComponent(response.id)}`, 'Read form responses →'));
-  if (recordedInterviews[response.key]) links.append(makeLink('response-card-link', recordedInterviews[response.key], 'Recorded interview →'));
-  card.append(links);
-  return card;
+// M2 findings: one line per consented respondent, linking to their answers on the same page.
+function renderSurveyFindings(responses) {
+  if (!surveyFindings) return;
+  if (!responses.length) {
+    surveyFindings.replaceChildren(makeTextElement('li', '', 'No consented survey responses yet.'));
+    return;
+  }
+  surveyFindings.replaceChildren(...responses.map((response) => {
+    const item = document.createElement('li');
+    item.append(makeLink('', `#response-${response.id}`, response.tag));
+    const metadata = [response.age, response.occupation].filter(Boolean).join(' · ');
+    if (metadata) item.append(` (${metadata})`);
+    item.append(' — full answers in the survey section.');
+    return item;
+  }));
 }
 
-function renderResponseDetail(response) {
-  responseList.hidden = true;
-  responseStatus.hidden = true;
-  responseDetail.hidden = false;
-  responseDetail.replaceChildren(makeLink('text-link response-back', './interviews.html#form-responses', '← All form responses'));
-  responseDetail.append(makeTextElement('p', 'eyebrow', 'GOOGLE FORM RESPONSE'));
-  const heading = makeTextElement('h3', 'response-title', response.tag);
-  heading.tabIndex = -1;
-  responseDetail.append(heading);
+function createResponseItem(response, headingLevel) {
+  const item = document.createElement('details');
+  item.className = 'response-item';
+  item.id = `response-${response.id}`;
 
-  const metadata = [response.age, response.occupation, response.timestamp].filter(Boolean).join(' · ');
-  if (metadata) responseDetail.append(makeTextElement('p', 'response-metadata', metadata));
-  if (recordedInterviews[response.key]) {
-    responseDetail.append(makeLink('text-link', recordedInterviews[response.key], 'Recorded interview and transcript →'));
-  }
+  const summary = document.createElement('summary');
+  summary.append(makeTextElement('span', 'response-name', response.tag));
+  const metadata = [response.age, response.occupation].filter(Boolean).join(' · ');
+  summary.append(makeTextElement('span', 'response-metadata', metadata));
+  summary.append(makeTextElement('span', 'expand-icon', '+'));
+  summary.lastChild.setAttribute('aria-hidden', 'true');
+  item.append(summary);
 
-  const answerList = document.createElement('div');
-  answerList.className = 'response-answers';
-  for (const item of response.answers) {
-    const answer = document.createElement('article');
+  const body = document.createElement('div');
+  body.className = 'response-body';
+  for (const entry of response.answers) {
+    const answer = document.createElement('div');
     answer.className = 'response-answer';
-    answer.append(makeTextElement('h4', '', item.question));
-    answer.append(makeTextElement('p', '', item.answer || 'No response provided.'));
-    answerList.append(answer);
+    answer.append(makeTextElement(`h${headingLevel}`, '', entry.question));
+    answer.append(makeTextElement('p', '', entry.answer || 'No response provided.'));
+    body.append(answer);
   }
-  responseDetail.append(answerList);
-  document.title = `Form responses: ${response.tag} — LogiQ`;
-  heading.focus({ preventScroll: true });
-  responseDetail.scrollIntoView({ block: 'start' });
+  const links = makeTextElement('p', 'response-links', '');
+  if (recordedInterviews[response.key]) links.append(makeLink('', recordedInterviews[response.key], 'Recorded interview and transcript →'));
+  links.append(makeLink('', `./interviews.html#${item.id}`, 'Link to this response'));
+  if (response.timestamp) links.append(makeTextElement('span', 'response-timestamp', `Submitted ${response.timestamp}`));
+  body.append(links);
+  item.append(body);
+  return item;
+}
+
+// Opens the response named in the URL: #response-<id>, or ?response=<id> from earlier links.
+function openRequestedResponse() {
+  const requestedId = window.location.hash.startsWith('#response-')
+    ? decodeURIComponent(window.location.hash.slice('#response-'.length))
+    : new URLSearchParams(window.location.search).get('response');
+  if (!requestedId) return;
+  const item = document.getElementById(`response-${requestedId}`);
+  if (!item) {
+    responseStatus.textContent = 'That response is unavailable or has not been approved for public display.';
+    return;
+  }
+  item.open = true;
+  item.scrollIntoView({ block: 'start' });
+  item.querySelector('summary').focus({ preventScroll: true });
 }
 
 async function loadResponses() {
@@ -151,27 +169,17 @@ async function loadResponses() {
     const feed = await fetch(`${responseFeedUrl}&refresh=${Date.now()}`, { cache: 'no-store' });
     if (!feed.ok) throw new Error(`The response feed returned ${feed.status}.`);
     const responses = parseResponses(await feed.text());
-    const requestedId = responseDetail && new URLSearchParams(window.location.search).get('response');
-
-    if (requestedId) {
-      const selected = responses.find((response) => response.id === requestedId);
-      if (selected) {
-        renderResponseDetail(selected);
-        return;
-      }
-      responseStatus.textContent = 'This response is unavailable or has not been approved for public display. ';
-      responseStatus.append(makeLink('text-link', './interviews.html#form-responses', 'See all form responses'));
-    }
-
     const headingLevel = Number(responseList.dataset.headingLevel) || 3;
-    responseList.replaceChildren(...responses.map((response) => createResponseCard(response, headingLevel)));
-    if (!requestedId) {
-      responseStatus.textContent = responses.length
-        ? `${responses.length} consented response${responses.length === 1 ? '' : 's'}.`
-        : 'No consented responses are available yet.';
-    }
+    responseList.replaceChildren(...responses.map((response) => createResponseItem(response, headingLevel)));
+    responseStatus.textContent = responses.length
+      ? `${responses.length} consented response${responses.length === 1 ? '' : 's'}. Select a name to read the answers.`
+      : 'No consented responses are available yet.';
+    renderSurveyFindings(responses);
+    openRequestedResponse();
+    window.addEventListener('hashchange', openRequestedResponse);
   } catch (error) {
     responseStatus.textContent = 'Form responses could not be loaded right now. Please try again later.';
+    if (surveyFindings) surveyFindings.replaceChildren(makeTextElement('li', '', 'Survey responses could not be loaded right now.'));
     console.error(error);
   }
 }
