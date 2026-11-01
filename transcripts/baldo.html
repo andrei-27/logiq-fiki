@@ -30,21 +30,12 @@
 
     <section class="transcript-method" aria-labelledby="method-title">
       <h2 id="method-title">How this transcript was made</h2>
-      <p><strong>Status: machine-assisted, not yet checked against the audio by a human listener.</strong> The recording was transcribed on a local computer with two open speech-recognition models (Whisper large-v3 and Whisper large-v3-turbo). The audio was not uploaded to any online service. Where the two models disagreed, the more consistent reading was kept only if it also fit the surrounding sentence; otherwise the passage is marked unclear. Each unclear spot was then re-checked by transcribing a short clip around it three times: with each model, and once more with the preceding words given as context. A gap was filled only where both models agreed. Markers were removed where no pass found any words, which most likely means a pause, breath or filler. The English translation was written from the Romanian transcript and is not an authoritative translation.</p>
+      <p><strong>Status: machine-assisted, not yet checked against the audio by a human listener.</strong> The recording was transcribed on a local computer with two open speech-recognition models (Whisper large-v3 and Whisper large-v3-turbo). The audio was not uploaded to any online service. Where the two models disagreed, the more consistent reading was kept only if it also fit the surrounding sentence; otherwise the passage is marked unclear. Each unclear spot was then re-checked by transcribing a short clip around it three times: with each model, and once more with the preceding words given as context. Gaps where both models agreed were filled; where no pass found any words, the gap was treated as a pause, breath or filler. The remaining gaps were filled with the most likely reading from context and are marked [?]. The English translation was written from the Romanian transcript and is not an authoritative translation.</p>
       <ul>
-        <li><span class="unclear">[neclar]</span> / <span class="unclear">[unclear]</span> — speech that could not be recognised reliably, including short sounds that neither model transcribed.</li>
-        <li>word<span class="uncertain">[?]</span> — a probable but uncertain reading.</li>
+        <li>word<span class="uncertain">[?]</span> — an uncertain or inferred reading: the speech models disagreed or were not confident, so the word was chosen to fit the context.</li>
         <li>Speaker label with (?) — the speaker could not be determined confidently.</li>
         <li>Hesitations and filler sounds are mostly omitted by the speech models; punctuation is approximate.</li>
         <li>Timestamps mark the start of each turn (minutes:seconds).</li>
-      </ul>
-      <h3>Notes on specific passages</h3>
-      <ul>
-        <li>“Federal Commission of Commerce … FCC” is transcribed as spoken; the participant said they were not sure what the abbreviation stands for.</li>
-        <li>The second model skipped the passage at 03:41–04:09 (X/Twitter community notes) in the first pass. A later check of that clip with the same model reproduced it almost word for word.</li>
-        <li>„cauți” (models: „căuci”/„cauci”), „din contră” („de-n contră”), „phishing” („fishing”), „combați” („combazi”) and „de-a bună” at 06:30 (one model: „de-a doua”) are normalised or resolved readings.</li>
-        <li>Speaker labels were assigned by reading the turn-taking; the recording has one microphone and no automatic speaker separation. Turns marked (?) could belong to either speaker.</li>
-        <li>„diferit” at 07:45 replaces an earlier reading, „deepfake”: four of five passes heard „diferit”.</li>
       </ul>
     </section>
 
@@ -143,8 +134,8 @@
           <button class="timestamp" type="button" data-time="114" aria-label="Play from 01:54">01:54</button>
           <div>
             <p class="speaker">Interviewer</p>
-            <p lang="ro">Și bun, asta era în cazul în care știrea era adevărată. Dar <span class="unclear">[neclar]</span> s-a părut că ai zis că verifici, nu știu, prin mai multe site-uri dacă e veridică sau nu. E ceva dificil sau, nu știu, time consuming, care, nu știu, te frustrează în procesul de a evalua veridicitatea unui fapt?</p>
-            <p class="translation" lang="en">And OK, that was in the case where the story was true. But <span class="unclear">[unclear]</span> seemed that you said you check, I don’t know, across several websites whether it is truthful or not. Is there something difficult or, I don’t know, time-consuming, that, I don’t know, frustrates you in the process of evaluating whether a fact is true?</p>
+            <p lang="ro">Și bun, asta era în cazul în care știrea era adevărată. Dar mi<span class="uncertain" title="Uncertain reading">[?]</span> s-a părut că ai zis că verifici, nu știu, prin mai multe site-uri dacă e veridică sau nu. E ceva dificil sau, nu știu, time consuming, care, nu știu, te frustrează în procesul de a evalua veridicitatea unui fapt?</p>
+            <p class="translation" lang="en">And OK, that was in the case where the story was true. But it seemed to me<span class="uncertain" title="Uncertain reading">[?]</span> that you said you check, I don’t know, across several websites whether it is truthful or not. Is there something difficult or, I don’t know, time-consuming, that, I don’t know, frustrates you in the process of evaluating whether a fact is true?</p>
           </div>
         </li>
         <li class="turn turn-participant" id="t-140">
@@ -159,8 +150,8 @@
           <button class="timestamp" type="button" data-time="186" aria-label="Play from 03:06">03:06</button>
           <div>
             <p class="speaker">Interviewer</p>
-            <p lang="ro">Ai vreo situație în care te-ai decis să nu treci printr-<span class="unclear">[neclar]</span> procesul ăsta de a, nu știu, investiga un claim online? Ce te-a făcut să treci peste partea de investigare?</p>
-            <p class="translation" lang="en">Do you have a situation in which you decided not to go through <span class="unclear">[unclear]</span> this process of, I don’t know, investigating an online claim? What made you skip the investigating part?</p>
+            <p lang="ro">Ai vreo situație în care te-ai decis să nu treci prin<span class="uncertain" title="Uncertain reading">[?]</span> procesul ăsta de a, nu știu, investiga un claim online? Ce te-a făcut să treci peste partea de investigare?</p>
+            <p class="translation" lang="en">Do you have a situation in which you decided not to go through<span class="uncertain" title="Uncertain reading">[?]</span> this process of, I don’t know, investigating an online claim? What made you skip the investigating part?</p>
           </div>
         </li>
         <li class="turn turn-participant" id="t-201">
@@ -271,8 +262,8 @@
           <button class="timestamp" type="button" data-time="465" aria-label="Play from 07:45">07:45</button>
           <div>
             <p class="speaker">Baldo</p>
-            <p lang="ro">Dacă deepfake-uri ne referim la poze, videouri, în general există tot felul de strategii care, pe măsură ce timpul trece, devin invalide, sau <span class="unclear">[neclar]</span> devine mai bun, să nu mai aibă acel indiciu care să îl dea de gol. În text e ceva mai greu; la fel se aplică ce am zis mai devreme: dacă găsești surse online pentru ceea ce ți-a fost spus, în general e din start un semn mai bun că ar fi adevărat, dar nu e 100%. Și dacă te referi<span class="uncertain" title="Uncertain reading">[?]</span> diferit<span class="uncertain" title="Uncertain reading">[?]</span>, în sens de voce, cu asta nu m-am întâlnit. Adică am văzut clipuri online, dar nu am avut, nu am… am avut interacțiune eu efectiv cu ceva de genul<span class="uncertain" title="Uncertain reading">[?]</span>.</p>
-            <p class="translation" lang="en">If by deepfakes we mean images, videos, there are generally all kinds of strategies which, as time goes by, become invalid, or <span class="unclear">[unclear]</span> gets better, so it no longer has the tell-tale sign that gives it away. In text it’s somewhat harder; the same applies as I said earlier: if you find sources online for what you were told, it’s generally a better sign from the start that it might be true, but it isn’t 100%. And if you mean<span class="uncertain" title="Uncertain reading">[?]</span> it differently<span class="uncertain" title="Uncertain reading">[?]</span>, in the sense of voice, I haven’t come across that. I mean, I’ve seen clips online, but I haven’t had, I haven’t… had an actual interaction myself with something like that<span class="uncertain" title="Uncertain reading">[?]</span>.</p>
+            <p lang="ro">Dacă deepfake-uri ne referim la poze, videouri, în general există tot felul de strategii care, pe măsură ce timpul trece, devin invalide, sau AI-ul<span class="uncertain" title="Uncertain reading">[?]</span> devine mai bun, să nu mai aibă acel indiciu care să îl dea de gol. În text e ceva mai greu; la fel se aplică ce am zis mai devreme: dacă găsești surse online pentru ceea ce ți-a fost spus, în general e din start un semn mai bun că ar fi adevărat, dar nu e 100%. Și dacă te referi<span class="uncertain" title="Uncertain reading">[?]</span> diferit<span class="uncertain" title="Uncertain reading">[?]</span>, în sens de voce, cu asta nu m-am întâlnit. Adică am văzut clipuri online, dar nu am avut, nu am… am avut interacțiune eu efectiv cu ceva de genul<span class="uncertain" title="Uncertain reading">[?]</span>.</p>
+            <p class="translation" lang="en">If by deepfakes we mean images, videos, there are generally all kinds of strategies which, as time goes by, become invalid, or the AI<span class="uncertain" title="Uncertain reading">[?]</span> gets better, so it no longer has the tell-tale sign that gives it away. In text it’s somewhat harder; the same applies as I said earlier: if you find sources online for what you were told, it’s generally a better sign from the start that it might be true, but it isn’t 100%. And if you mean<span class="uncertain" title="Uncertain reading">[?]</span> it differently<span class="uncertain" title="Uncertain reading">[?]</span>, in the sense of voice, I haven’t come across that. I mean, I’ve seen clips online, but I haven’t had, I haven’t… had an actual interaction myself with something like that<span class="uncertain" title="Uncertain reading">[?]</span>.</p>
           </div>
         </li>
         <li class="turn turn-interviewer" id="t-527">
