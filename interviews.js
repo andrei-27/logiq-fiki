@@ -10,7 +10,7 @@ const publicConsent = 'I consent to public display of my full response on the Lo
 // Submitted before the form asked for consent; approved individually. Only the first row with
 // each tag counts, so a later submission reusing the name still needs the consent box.
 const legacyApprovedTags = new Set(['matias']);
-const recordedInterviews = { gabi: './transcripts/gabi.html', baldo: './transcripts/baldo.html' };
+const recordedInterviews = { gabi: './transcripts/gabi.html', baldo: './transcripts/baldo.html', georgiana: './transcripts/georgiana.html' };
 // Team-written summaries of reviewed survey responses, keyed by response id (as in #response-<id>).
 // Responses without an entry are shown as new and not yet reviewed.
 const reviewedSummaries = {};
