@@ -8,6 +8,8 @@
   <title>LogiQ — A little more thought.</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./m3.css">
+  <script src="./examples.js" defer></script>
   <script src="./script.js" defer></script>
 </head>
 <body>
@@ -38,11 +40,11 @@
       </div>
     </section>
 
-    <section id="journey" class="journey-section"><div class="container section"><div class="section-heading inline-heading"><div><p class="eyebrow">01 / THE PROJECT JOURNAL</p><h2>An idea, in progress.<br><em>Every step documented.</em></h2></div><div><p>This is our Fiki: the evolving record of how we define, test, and build LogiQ.</p><span class="status-legend"><span class="live-dot" aria-hidden="true"></span> CURRENT FOCUS: M2</span></div></div>
+    <section id="journey" class="journey-section"><div class="container section"><div class="section-heading inline-heading"><div><p class="eyebrow">01 / THE PROJECT JOURNAL</p><h2>An idea, in progress.<br><em>Every step documented.</em></h2></div><div><p>This is our Fiki: the evolving record of how we define, test, and build LogiQ.</p><span class="status-legend"><span class="live-dot" aria-hidden="true"></span> CURRENT FOCUS: M3</span></div></div>
       <div class="milestone-list">
         <details class="milestone"><summary><span class="milestone-number">M0</span><span class="milestone-title">Idea registration</span><span class="status status-defined">Idea defined</span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="milestone-content"><p>LogiQ’s starting concept is a digital copilot for critical thinking. It aims to highlight potentially problematic reasoning and explain it in accessible language.</p><p class="small-note">This status describes the idea’s definition, not confirmation of course registration.</p></div></details>
         <details class="milestone"><summary><span class="milestone-number">M1</span><span class="milestone-title">Fiki & project description</span><span class="status status-defined">Documented</span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="milestone-content"><p class="eyebrow">19 OCTOBER 2026 · PROJECT DEFINITION</p><p>This page presents the problem, proposed solution, customer segments, competitive positioning, metrics, costs, revenue hypotheses, and team.</p><div class="milestone-links"><a href="#idea">Problem & solution ↗</a><a href="#audience">Customer segments ↗</a><a href="#model">Business model ↗</a><a href="#metrics">Key metrics ↗</a><a href="#team">Team ↗</a></div><p><strong>Next decisions:</strong> use customer discovery to test whether the problem exists before pitching a solution.</p><a class="text-link" href="https://ocw.cs.pub.ro/courses/se/project/milestones/m1" target="_blank" rel="noopener noreferrer">Official M1 requirements ↗</a></div></details>
-        <details class="milestone current" id="m2" open><summary><span class="milestone-number">M2</span><span class="milestone-title">Idea validation</span><span class="status status-current">Current</span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="milestone-content m2-content"><p class="eyebrow">02 NOVEMBER 2026 · VALIDATION 1 (IDEA)</p>
+        <details class="milestone" id="m2"><summary><span class="milestone-number">M2</span><span class="milestone-title">Idea validation</span><span class="status status-defined">Documented</span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="milestone-content m2-content"><p class="eyebrow">02 NOVEMBER 2026 · VALIDATION 1 (IDEA)</p>
 <p>M1 framed the problem as a hypothesis: online content mixes claims with persuasive framing, which can make evaluation effortful. We hypothesize that a brief, contextual explanation and a question about missing evidence could help readers assess arguments while reading.</p><p>To test the problem, we talk to people through recorded interviews, chat interviews and an online survey. Their answers are on the Interviews and Findings pages, and new survey responses appear there automatically once their authors consent to it. Most conversations focus on the problem rather than on LogiQ itself, so the solution is still largely untested.</p>
 <div class="m2-actions"><a class="button button-dark" href="https://docs.google.com/forms/d/e/1FAIpQLSe82ZtVTgC3aXJwMPEf3MrmYU-SiMWx-4xmwU0hlK-8k3c6nw/viewform" target="_blank" rel="noopener noreferrer">Open the online survey <span aria-hidden="true">↗</span></a><a class="button button-outline" href="./interviews.html">Browse interviews and responses <span aria-hidden="true">→</span></a><a class="button button-outline" href="./findings.html">Findings: what each participant said <span aria-hidden="true">→</span></a></div>
 <p class="small-note">What each participant said is on the <a href="./findings.html">findings page</a>. The sections below are our interpretation, and we revise them as new interviews and survey responses come in.</p>
@@ -71,7 +73,31 @@
 <li>Some of our interview questions were leading, which weakens the evidence.</li></ul>
 <p><strong>What would change this decision:</strong> consistent evidence, from a clearly defined group, that judging arguments is a real and recurring difficulty, plus a positive response to the M3 prototype.</p>
 <p><strong>Next:</strong> keep reviewing interviews and survey responses as they arrive, check the transcripts against the audio, define one segment and document how we recruit, and use the M3 prototype and landing page to test whether people understand and want LogiQ.</p></div></details>
-        <details class="milestone"><summary><span class="milestone-number">M3</span><span class="milestone-title">Mockups & landing page</span><span class="status">Planned</span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="milestone-content"><p>Adapt the existing LogiQ design exploration into a focused prototype. Build a separate customer-facing landing page and record what it is intended to test.</p><p><strong>Evidence to add:</strong> prototype link, main screens, landing page, and feedback.</p></div></details>
+        <details class="milestone current" id="m3" open>
+          <summary><span class="milestone-number">M3</span><span class="milestone-title">Wireframes &amp; landing page</span><span class="status status-current">Current</span><span class="expand-icon" aria-hidden="true">+</span></summary>
+          <div class="milestone-content m3-content">
+            <p class="eyebrow">09 NOVEMBER 2026 · WIREFRAMES &amp; LANDING PAGE</p>
+            <p>M3 includes five interactive wireframes showing the product's structure, controls and navigation, plus a separate customer-facing landing page.</p>
+            <div class="m2-actions"><a class="button button-dark" href="./wireframes.html">Explore the interactive wireframes <span aria-hidden="true">→</span></a><a class="button button-outline" href="./landing.html">Open the landing page <span aria-hidden="true">↗</span></a><a class="button button-outline" href="./assets/m3-wireframes.svg">Open the full-size wireframe overview <span aria-hidden="true">↗</span></a></div>
+            <figure class="m3-artifact"><a href="./assets/m3-wireframes.svg"><img src="./assets/m3-wireframes.svg" width="1180" height="800" loading="lazy" alt="Five LogiQ wireframes: reading opens an explanation, with optional branches to context, sharing and feedback. Each branch can return to the explanation or reading."></a><figcaption>Wireframes and navigation. The main path is reading → explanation; context, sharing and feedback are optional. Open the image for full-size labels, or use the interactive screens below.</figcaption></figure>
+            <h3>Screens and interactions</h3>
+            <ol class="m3-flow">
+              <li><a href="./wireframes.html#reading">Reading / selected passage.</a> Choose a sample argument and click “Explain this passage” to open the explanation. The highlight stands in for text selection in a future browser extension.</li>
+              <li><a href="./wireframes.html#explanation">Explanation panel.</a> See a potential reasoning issue, a plain-language explanation, and a question about missing evidence. Close or dismiss the panel to return to reading without giving feedback.</li>
+              <li><a href="./wireframes.html#context">Context and evidence questions.</a> Read caveats, expand an unfamiliar term, and consider what to check next. These are suggested checks, not retrieved or verified sources.</li>
+              <li><a href="./wireframes.html#share">Shareable explanation.</a> Preview and copy the passage, explanation and caveats together. Copy failure is visible and manual copying remains available; nothing is posted automatically.</li>
+              <li><a href="./wireframes.html#feedback">Reader feedback.</a> Choose Helpful, Unclear, or I disagree, optionally explain why, and preview a local confirmation. Nothing is sent or stored. Reset returns to the first sample.</li>
+            </ol>
+            <p class="small-note">The prototype supports direct screen links, browser Back/Forward, an all-screens view and printing. Without JavaScript, the complete first example remains visible across all five screens.</p>
+            <h3>Design choices</h3>
+            <p>The wireframes follow the needs discussed in M2: plain-language explanations, questions about evidence, optional depth, easy dismissal, and sharing with context. Readers can disagree with an explanation; the interface does not assign truth scores.</p>
+            <h3>Landing page</h3>
+            <p>The separate page introduces LogiQ, explains the proposed experience and its limits, and offers a “Try the interactive prototype” action. It lets visitors explore the concept without signing up.</p>
+            <h3>M3 scope</h3>
+            <p>These are wireframes and a concept landing page, not the MVP. The three examples are handcrafted; there is no live AI, page access, source retrieval, account creation, analytics or feedback backend. Usability validation and a working MVP belong to later milestones.</p>
+            <a class="text-link" href="https://ocw.cs.pub.ro/courses/se/project/milestones/m3" target="_blank" rel="noopener noreferrer">Official M3 requirements ↗</a>
+          </div>
+        </details>
         <details class="milestone"><summary><span class="milestone-number">M4</span><span class="milestone-title">Personas, flows & architecture</span><span class="status">Planned</span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="milestone-content"><p>Refine personas from research, map the reading-to-explanation flow, write user stories, and define an architecture with explicit analysis and privacy boundaries.</p><p><strong>Evidence to add:</strong> personas, user flows, prioritized stories, and architecture decisions.</p></div></details>
         <details class="milestone"><summary><span class="milestone-number">M5</span><span class="milestone-title">Design & UX validation</span><span class="status">Planned</span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="milestone-content"><p>Test whether users notice an insight, understand its explanation, and can disagree or dismiss it. Look for confusing labels and unnecessary interruptions.</p><p><strong>Evidence to add:</strong> tasks, observations, and before-and-after design changes.</p></div></details>
         <details class="milestone"><summary><span class="milestone-number">M6</span><span class="milestone-title">Market research</span><span class="status">Planned</span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="milestone-content"><p>Investigate named competitors, distribution channels, likely buyers, and willingness to pay. Separate sourced evidence from estimates.</p><p><strong>Evidence to add:</strong> competitor audit, market assumptions, and pricing experiments.</p></div></details>
@@ -82,7 +108,7 @@
       </div>
     </div></section>
 
-    <div class="project-strip"><div class="container strip-inner"><span><strong>01</strong> Current milestone: idea validation</span><span><strong>02</strong> Next: more problem interviews</span><a href="#journey">Open project journal <span aria-hidden="true">↗</span></a></div></div>
+    <div class="project-strip"><div class="container strip-inner"><span><strong>01</strong> Current milestone: wireframes &amp; landing page</span><span><strong>02</strong> Next: refine flows and test the design</span><a href="./landing.html">Open the product landing page <span aria-hidden="true">↗</span></a></div></div>
 
     <section id="idea" class="container section idea-section">
       <div class="section-heading"><p class="eyebrow">02 / THE PROBLEM & THE IDEA</p><h2>More information.<br><em>Less room to reflect.</em></h2></div>
