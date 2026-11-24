@@ -11,6 +11,7 @@
 .workspace-heading { display:flex; justify-content:space-between; gap:40px; align-items:end; margin-bottom:28px; }
 .workspace-heading h1 { font-size:clamp(32px,3.2vw,46px); margin-top:12px; }
 .workspace-intro { font-size:16px; line-height:1.7; color:var(--muted); max-width:330px; }
+.workspace-heading .early-access-button { margin-top:12px; }
 .experience-controls { display:flex; align-items:end; flex-wrap:wrap; gap:15px 22px; margin-bottom:22px; }
 .control-label { display:block; font-size:14px; line-height:1.5; color:var(--muted); margin-bottom:7px; }
 .segmented { display:flex; border:1px solid #bdc4b2; border-radius:6px; overflow:hidden; background:var(--white); }

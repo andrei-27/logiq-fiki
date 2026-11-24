@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f3ed">
-  <meta name="description" content="How the LogiQ team will attract early readers and measure conversion in Milestone 5.">
+  <meta name="description" content="Share the LogiQ reading prototype, see the measured signup baseline, and compare outreach channels.">
   <title>M5 — Lead generation | LogiQ</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
@@ -13,43 +13,51 @@
   <link rel="stylesheet" href="./m5-campaign.css">
   <script src="./site.js?v=responsive-1" defer></script>
   <script src="./m5-config.js" defer></script>
+  <script src="./m5-attribution.js" defer></script>
   <script src="./m5-analytics.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header global-header"><a class="wordmark" href="./index.html" aria-label="LogiQ project home">Logi<span>Q</span><span class="brand-dot">.</span></a><button type="button" class="menu-toggle" aria-expanded="false" aria-controls="global-nav" hidden>Menu <span aria-hidden="true">+</span></button><nav id="global-nav" aria-label="Main navigation"><a href="./index.html#journey">Project journal</a><a href="./ux.html">UX &amp; research</a><a href="./interviews.html">Interviews</a><a class="nav-cta" href="./news.html">Try LogiQ →</a></nav></header>
+  <header class="site-header global-header"><a class="wordmark" href="./index.html" aria-label="LogiQ project home">Logi<span>Q</span><span class="brand-dot">.</span></a><button type="button" class="menu-toggle" aria-expanded="false" aria-controls="global-nav" hidden>Menu <span aria-hidden="true">+</span></button><nav id="global-nav" aria-label="Main navigation"><a href="./index.html#journey">Project journal</a><a class="nav-cta" href="./news.html">Try LogiQ →</a></nav></header>
   <main id="main">
     <section class="container section m5-campaign-hero">
       <p class="eyebrow">M5 / VALIDATION 2 · 26 NOVEMBER 2026</p>
-      <h1>Find the readers.<br><em>Measure the interest.</em></h1>
-      <p class="m5-campaign-intro">Milestone 5 moves beyond interview feedback to test whether people will visit LogiQ, explore the concept, and voluntarily sign up for future product updates.</p>
-      <div class="hero-actions"><a class="button button-dark" href="./landing.html#early-access">Open the signup →</a><a class="text-link" href="./index.html#m5">Back to the M5 journal ↗</a></div>
+      <h1>Will readers sign up<br><em>to try LogiQ?</em></h1>
+      <p class="m5-campaign-intro">Readers can explore a sample news story without an account. For this experiment, we measure whether they also choose to leave an email for future testing.</p>
+      <div class="hero-actions"><a class="button button-dark" href="#share">Get the outreach links ↓</a><a class="text-link" href="#baseline">See the baseline ↓</a></div>
     </section>
-    <section class="m5-campaign-tint"><div class="container section">
-      <div class="section-heading inline-heading"><div><p class="eyebrow">01 / THE LEAD EXPERIMENT</p><h2>Two actions.<br><em>Real intent.</em></h2></div><p>Our hypotheses remain unproven until we have visitors, a reachable audience and reliable conversion measurements.</p></div>
+    <section class="m5-campaign-tint" id="share" aria-labelledby="share-title"><div class="container section">
+      <div class="section-heading"><p class="eyebrow">01 / Outreach</p><h2 id="share-title">One page. Three ways to share it.</h2><p>Copy the link for the audience you are inviting. Each opens the same landing page; the tag identifies the channel, not the person. Avoid including names or email addresses in links.</p></div>
       <div class="steps-grid m5-campaign-steps">
-        <article><span class="step-number">01 / DISCOVER</span><h3>A reader arrives.</h3><p>Reach university, media-literacy and online discussion communities using distinct UTM-tagged links.</p></article>
-        <article><span class="step-number">02 / EXPLORE</span><h3>A reader tries the concept.</h3><p>Measure visits to the landing page and clicks to the interactive sample-news prototype.</p></article>
-        <article><span class="step-number">03 / SUBSCRIBE</span><h3>A reader opts in.</h3><p>Count successful, consent-based email signups via Formspree. An email is a lead, not proof of a future sale.</p></article>
+        <article><h3>Personal</h3><p>For friends or contacts who already check the news they read.</p><a class="text-link" href="https://andrei-27.github.io/logiq-fiki/landing.html?utm_source=personal&amp;utm_medium=message&amp;utm_campaign=m5_validation_2">Personal invitation link →</a></article>
+        <article><h3>University</h3><p>For a student group, society or class forum that welcomes project invitations.</p><a class="text-link" href="https://andrei-27.github.io/logiq-fiki/landing.html?utm_source=university&amp;utm_medium=community&amp;utm_campaign=m5_validation_2">University invitation link →</a></article>
+        <article><h3>Online</h3><p>For a relevant public community or social post. Follow the community’s posting rules.</p><a class="text-link" href="https://andrei-27.github.io/logiq-fiki/landing.html?utm_source=online&amp;utm_medium=social&amp;utm_campaign=m5_validation_2">Online invitation link →</a></article>
       </div>
+      <aside class="m5-measurement-intro" aria-label="Suggested invitation"><h3>An invitation you can use</h3><p>“How do you check a headline before sharing it? We’re students building LogiQ. Try a sample story and see the source behind a claim. No account needed. If you’d like to test the next version, you can leave your email.” Add the link for your channel.</p></aside>
     </div></section>
-    <section class="container section m5-campaign-results" aria-labelledby="m5-channel-title">
-      <div class="section-heading"><p class="eyebrow">02 / CAMPAIGN EVIDENCE</p><h2 id="m5-channel-title">What we shared.<br><em>What happened.</em></h2><p>Post links, channel comparisons and screenshots are published only after real outreach. The analytics and lead collection integrations are ready to measure genuine traffic.</p></div>
-      <div class="m5-measurement-intro">
-        <p class="eyebrow">MEASUREMENT IS ACTIVE ON DEPLOYMENT</p>
-        <h3>Measure visits. Follow curiosity.</h3>
-        <p>PostHog captures page views, links and interactions automatically, and records masked sessions. A Formspree submission counts as a lead only after successful delivery. Outreach posts and channel performance will be documented from real campaign evidence.</p>
-        <p>Campaign links carry <code>utm_source</code>, <code>utm_medium</code> and <code>utm_campaign</code>. Compare visitors and confirmed signups using the same channel and reporting window; retain the actual post links and dates rather than estimates.</p>
+    <section class="container section m5-campaign-results" id="baseline" aria-labelledby="baseline-title">
+      <div class="section-heading"><p class="eyebrow">02 / Baseline · <time datetime="2026-11-24">24 November 2026</time></p><h2 id="baseline-title">One of two tracked visitors reached signup success.</h2><p>These team-provided screenshots show that the tools received data. They do not establish how many external readers joined or which channel works best.</p></div>
+      <div class="m5-evidence-grid">
+        <figure><h3>PostHog: people in the funnel</h3><a href="./assets/m5/posthog-baseline.png"><img width="850" height="732" loading="lazy" src="./assets/m5/posthog-baseline.png" alt="PostHog funnel: 2 landing visitors, 2 viewed the signup section, 1 reached signup success. Open full image."></a><figcaption>Last 30 days in the snapshot: 1 of 2 tracked visitors completed the funnel. Seeing the form does not mean starting it.</figcaption></figure>
+        <figure><h3>Formspree: accepted submissions</h3><a href="./assets/m5/formspree-baseline.png"><img width="1000" height="116" loading="lazy" src="./assets/m5/formspree-baseline.png" alt="Two accepted rows with consent and direct source; private columns removed. Open full image."></a><figcaption>Both rows shown are <code>direct / none</code>. Submissions are not unique people. Repeat entries, team tests and visitors without analytics can make the tools disagree. Neither row is attributed to the outreach links above.</figcaption></figure>
       </div>
-      <div class="m5-evidence-grid"><article><p class="eyebrow">PROOF TO ADD</p><h3>Outreach links &amp; screenshots</h3><p>For every post, attach the permalink, publication date, anonymized screenshot, UTM link, and any moderation approval. A post isn't counted until it actually appears.</p></article><article><p class="eyebrow">PROOF TO ADD</p><h3>Measurement screenshots</h3><p>Add dated PostHog web analytics and funnel screenshots and an aggregate Formspree submission count. Never display subscriber email addresses publicly.</p></article></div>
     </section>
-    <section class="m5-campaign-tint"><div class="container section m5-campaign-decisions">
-      <p class="eyebrow">03 / HOW WE WILL DECIDE</p><h2>Learn from behavior.<br><em>Not applause.</em></h2>
-      <div class="m5-evidence-grid"><article><h3>What counts as traction?</h3><p>Visitors arriving from a repeatable channel, meaningful prototype clicks, and consented early-access registrations. We will not infer paying demand from a waitlist alone.</p></article><article><h3>What if a channel underperforms?</h3><p>Compare visits, clicks and confirmed signups per channel. Record distribution effort and audience fit before choosing where to focus the next test.</p></article></div>
-      <p class="m5-campaign-status"><strong>Campaign status:</strong> Formspree and PostHog are configured, with session recording enabled in PostHog. Publishing campaign evidence and comparing channels requires real distribution and real visitor data.</p>
+    <section class="m5-campaign-tint" id="results" aria-labelledby="results-title"><div class="container section m5-campaign-decisions">
+      <p class="eyebrow">03 / Channel comparison</p><h2 id="results-title">Where did readers come from?</h2>
+      <p>Post dates and channel-level counts have not been supplied yet. A dash means <strong>not reported</strong>, not zero.</p>
+      <table class="m5-results-table"><caption>Outreach evidence, excluding team and test traffic</caption>
+        <thead><tr><th scope="col">Source</th><th scope="col">Dated post or evidence</th><th scope="col">Landing visitors</th><th scope="col">Tracked successes</th><th scope="col">Distinct opt-in leads</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Personal</th><td>Not documented</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><th scope="row">University</th><td>Not documented</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><th scope="row">Online</th><td>Not documented</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <div class="m5-evidence-grid"><article><h3>Keep proof of distribution</h3><p>Record the time in Europe/Bucharest, the exact tagged link, the published post permalink and a redacted screenshot. For private messages, keep the invitation count and date without naming recipients.</p></article><article><h3>Compare like with like</h3><p>Use one reporting window for all three channels. Show PostHog successes / unique tracked landing visitors, and separately count distinct consenting, non-test addresses in Formspree. Keep <code>direct</code> traffic separate. Record one observed behavior from a masked replay, if available.</p></article></div>
+      <p class="m5-campaign-status"><strong>Decision:</strong> No winning channel yet. Once evidence is available, compare both lead volume and tracked rate, show their denominators, and choose which invitation to repeat. A signup is not a sale.</p>
       <a class="text-link" href="./landing.html">View the customer-facing landing page →</a>
     </div></section>
   </main>
-  <footer class="container site-footer"><a class="wordmark" href="./index.html">Logi<span>Q</span><span class="brand-dot">.</span></a><p>A student project about evidence and curiosity.<br>Milestone 5 · Lead generation</p><a href="./index.html#m5">Back to milestone 5 →</a></footer>
+  <footer class="container site-footer"><a class="wordmark" href="./index.html">Logi<span>Q</span><span class="brand-dot">.</span></a><p>A student project about evidence and curiosity.<br>Milestone 5 · Lead generation</p><button hidden id="m5-tracking-toggle" type="button" class="m5-privacy-settings">Disable analytics</button><a href="./index.html#m5">Back to milestone 5 →</a></footer>
 </body>
 </html>

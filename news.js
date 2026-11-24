@@ -178,6 +178,11 @@ document.addEventListener('keydown', event => {
 });
 $('demo-settings').open = !matchMedia('(max-width:720px)').matches;
 $('app').hidden = false; render();
-const visibility = new IntersectionObserver(entries => { readingVisible = entries[0].isIntersecting; scheduleAlert(); }, { threshold: 0 });
-visibility.observe($('reading-surface'));
+if ('IntersectionObserver' in window) {
+  const visibility = new IntersectionObserver(entries => { readingVisible = entries[0].isIntersecting; scheduleAlert(); });
+  visibility.observe($('reading-surface'));
+} else {
+  readingVisible = true;
+  scheduleAlert();
+}
 window.addEventListener('resize', syncReviewMode);

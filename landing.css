@@ -10,7 +10,8 @@
 .landing-invite { text-align: center; max-width: 720px; }
 .landing-invite h2 { margin-top: 22px; }
 .landing-invite > p:not(.eyebrow) { color: var(--muted); margin: 24px auto; }
-.landing-invite > .text-link { display: table; margin: 24px auto 0; }
+.landing-invite .hero-actions { justify-content:center; }
+.landing-hero .hero-actions .text-link,.landing-invite .hero-actions .text-link { display:inline-flex;align-items:center;gap:8px;min-height:44px; }
 @media (max-width:1100px) { .landing-hero { gap:30px; } }
 @media (max-width:760px) {
  .landing-hero { grid-template-columns:1fr; gap:45px; padding-bottom:55px; }
@@ -18,6 +19,10 @@
  .landing-preview .demo-window { max-width:none; }
 }
 @media (max-width:400px) { .preview-caption { flex-wrap:wrap; } }
+@media (max-width:550px) {
+ .landing-hero .hero-actions,.landing-invite .hero-actions { flex-direction:column; gap:8px; }
+ .landing-hero .hero-actions .early-access-button,.landing-invite .hero-actions .early-access-button { width:100%; justify-content:center; }
+}
 
 /* M5 — same quiet editorial design language as the Fiki. */
 .m5-signup-section {display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(32px,6vw,85px);align-items:center;border-top:1px solid var(--line)}
@@ -43,8 +48,6 @@
 .m5-privacy-note {font-size:12px;line-height:1.7;color:var(--muted);border-top:1px solid var(--line);padding-top:17px;margin-top:18px}
 .m5-honeypot {position:absolute;left:-10000px;height:1px;width:1px;overflow:hidden}
 .m5-footer-links {display:flex;gap:18px;flex-wrap:wrap;align-items:center}
-.m5-privacy-settings {border:0;background:none;color:var(--muted);font:12px var(--mono);text-decoration:underline;text-underline-offset:4px;padding:5px 0}
-.m5-privacy-settings:hover {color:var(--violet)}
 .m5-tracking-notice {font-size:12px;line-height:1.5;color:var(--muted);max-width:350px}
 @media(max-width:920px){.m5-signup-section {grid-template-columns:1fr;gap:30px}.m5-signup-intro > p:not(.eyebrow) {max-width:700px}.m5-signup-card {max-width:680px}}
 @media(max-width:550px){.m5-signup-card {padding:24px 20px}.m5-footer-links {display:block}.m5-footer-links > * {display:block;margin-top:8px}.m5-signup-card h3 {font-size:28px}}

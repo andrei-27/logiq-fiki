@@ -16,3 +16,11 @@
 .m5-campaign-decisions h2 {margin:20px 0 15px}
 .m5-campaign-status {font-size:15px;border-left:2px solid var(--violet);padding-left:18px;margin:30px 0}
 @media(max-width:760px) {.m5-evidence-grid {grid-template-columns:1fr;gap:20px}.m5-campaign-intro {font-size:18px}}
+
+.m5-campaign-steps .text-link {display:inline-flex;align-items:center;min-height:44px}
+.m5-evidence-grid figure {min-width:0;margin:0}
+.m5-evidence-grid img {display:block;width:100%;height:auto;border:1px solid var(--line);margin-block:16px}
+.m5-evidence-grid figcaption {color:var(--muted);font-size:15px;line-height:1.6}
+.m5-results-table {border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;margin:24px 0}
+.m5-results-table caption {text-align:left;color:var(--muted);padding-bottom:8px}
+.m5-results-table :is(th,td) {padding:12px;text-align:left;border-bottom:1px solid var(--line)}
