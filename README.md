@@ -11,7 +11,7 @@ Main files: `news.html`, `news.js`, `news-data.js`, `m4.css` (prototype); `ux.ht
 
 ## M5 — validation 2 (lead generation)
 
-The [landing page](https://andrei-27.github.io/logiq-fiki/landing.html#early-access) has an early-access signup powered by Formspree. The [M5 campaign Fiki](https://andrei-27.github.io/logiq-fiki/m5-campaign.html) records the distribution strategy and will document actual posts, links and channel comparisons after outreach.
+**Get early access** is the main action on the [landing page](https://andrei-27.github.io/logiq-fiki/landing.html#early-access). Readers can also try the demo without signing up, then use its early-access button to return to the Formspree signup with their campaign tags intact. Research and interviews remain available from the project journal. The [M5 campaign Fiki](https://andrei-27.github.io/logiq-fiki/m5-campaign.html) records the distribution strategy and will document actual posts, links and channel comparisons after outreach.
 
 The public Formspree endpoint and PostHog EU project token are configured in `m5-config.js` (no private API secrets). Only the published site sends submissions or analytics; local and fork previews cannot create campaign traffic. The signup requires consent. PostHog captures page views, CTA clicks and form engagement; input values and signup form text are masked for replay. Visitors can disable tracking in the footer of each tracked page and can still sign up. Keep private keys, subscriber exports and unredacted screenshots out of this repository.
 
