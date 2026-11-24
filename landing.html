@@ -11,19 +11,20 @@
   <link rel="stylesheet" href="./landing.css">
 <link rel="stylesheet" href="./site-ui.css?v=responsive-1"><script src="./site.js?v=responsive-1" defer></script>
   <script src="./m5-config.js" defer></script>
+  <script src="./m5-attribution.js" defer></script>
   <script src="./m5-analytics.js" defer></script>
   <script src="./m5-leads.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header global-header"><a class="wordmark" href="./index.html" aria-label="LogiQ project home">Logi<span>Q</span><span class="brand-dot">.</span></a><button type="button" class="menu-toggle" aria-expanded="false" aria-controls="global-nav" hidden>Menu <span aria-hidden="true">+</span></button><nav id="global-nav" aria-label="Main navigation"><a href="./index.html#journey">Project journal</a><a href="./ux.html">UX & research</a><a href="./interviews.html">Interviews</a><a class="nav-cta" href="./news.html">Try LogiQ →</a></nav></header>
+  <header class="site-header global-header"><a class="wordmark" href="./index.html" aria-label="LogiQ project home">Logi<span>Q</span><span class="brand-dot">.</span></a><button type="button" class="menu-toggle" aria-expanded="false" aria-controls="global-nav" hidden>Menu <span aria-hidden="true">+</span></button><nav id="global-nav" aria-label="Main navigation"><a href="./index.html#journey">Project journal</a><a href="./ux.html">UX &amp; research</a><a href="./interviews.html">Interviews</a><a class="nav-cta" href="#early-access" data-m5-track="waitlist">Join early testing →</a></nav></header>
   <main id="main">
     <section class="hero container landing-hero" aria-labelledby="landing-title">
       <div class="hero-copy">
         <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> A CRITICAL-THINKING COPILOT CONCEPT</p>
         <h1 id="landing-title">A striking headline.<br><em>What backs it up?</em></h1>
         <p class="hero-description">LogiQ is a browser companion concept that helps you check news claims, follow their evidence, and understand missing context before you share.</p>
-        <div class="hero-actions"><a class="button button-dark" href="./news.html" data-m5-track="prototype">Try the interactive prototype <span aria-hidden="true">&rarr;</span></a><a class="text-link" href="#early-access" data-m5-track="waitlist">Get early access &darr;</a></div>
+        <div class="hero-actions"><a class="button button-dark" href="#early-access" data-m5-track="waitlist">Get an early-test invitation &darr;</a><a class="text-link" href="./news.html" data-m5-track="prototype">Try a sample story &rarr;</a></div>
         <p class="hero-footnote">Desktop and mobile. Browser and feed. Your judgment.</p>
         <p class="small-note landing-disclaimer">Explore the concept with sample stories and curated evidence.</p>
       </div>
@@ -59,7 +60,7 @@
 <section id="early-access" class="container section m5-signup-section" aria-labelledby="m5-signup-title">
   <div class="m5-signup-intro">
     <p class="eyebrow">EARLY ACCESS · LOGIQ PROJECT</p>
-    <h2 id="m5-signup-title">Curiosity looks good<br><em>on you.</em></h2>
+    <h2 id="m5-signup-title">Get an invitation<br><em>to test LogiQ.</em></h2>
     <p>We’re building a better way to question a headline and follow its evidence. Leave your email to hear when LogiQ is ready to test.</p>
     <div class="m5-signup-note"><span aria-hidden="true">↳</span><p><strong>Just the useful updates.</strong><br>Occasional progress notes and early testing invitations. No account required.</p></div>
   </div>
@@ -76,10 +77,11 @@
       <input type="hidden" name="campaign_name" id="m5-campaign" value="m5_validation_2">
       <input type="hidden" name="campaign_content" id="m5-content" value="default">
       <label class="m5-checkbox-label"><input id="m5-email-consent" type="checkbox" name="consent_to_email" value="yes" required><span>I agree to receive occasional LogiQ updates and early-access invitations by email.</span></label>
-      <button id="m5-submit" class="button button-dark m5-submit" type="submit">Join the list <span aria-hidden="true">→</span></button>
+      <button id="m5-submit" class="button button-dark m5-submit" type="submit" disabled>Join the list <span aria-hidden="true">→</span></button>
+      <noscript>Enable JavaScript to join the list. You can still read about the project without signing up.</noscript>
       <p id="m5-form-status" class="m5-form-status" role="status" aria-live="polite"></p>
     </form>
-    <p id="m5-form-privacy" class="m5-privacy-note">We send your email, signup consent and campaign source to Formspree for LogiQ updates. PostHog measures site visits and interactions, including masked session replays; signup email contents are excluded. Unsubscribe by <a href="mailto:andrei.pirlea@stud.acs.upb.ro?subject=Unsubscribe%20from%20LogiQ">emailing the team</a>. No email addresses are sent to analytics.</p>
+    <p id="m5-form-privacy" class="m5-privacy-note">Formspree receives your email, consent and campaign tags for LogiQ updates. PostHog measures site visits and interactions with masked replay; signup emails are excluded from our analytics events. You can disable analytics in the footer and still sign up. Unsubscribe by <a href="mailto:andrei.pirlea@stud.acs.upb.ro?subject=Unsubscribe%20from%20LogiQ">emailing the team</a>.</p>
   </div>
 </section>
 
@@ -90,6 +92,6 @@
       <a class="text-link" href="#early-access" data-m5-track="waitlist">Or get updates and early access</a>
     </section>
   </main>
-  <footer class="container site-footer"><a class="wordmark" href="./landing.html">Logi<span>Q</span><span class="brand-dot">.</span></a><p>Early concept. Built around curiosity.<br>Student project &middot; SE 2026&ndash;27</p><div class="m5-footer-links"><a href="./index.html#m5">The LogiQ project journal →</a><button id="m5-tracking-toggle" type="button" class="m5-privacy-settings" aria-label="Disable or enable website analytics">Disable analytics</button><span class="m5-tracking-notice">PostHog measures visits, clicks and masked session replay. IPs are anonymized; signup emails are excluded.</span></div></footer>
+  <footer class="container site-footer"><a class="wordmark" href="./landing.html">Logi<span>Q</span><span class="brand-dot">.</span></a><p>Early concept. Built around curiosity.<br>Student project &middot; SE 2026&ndash;27</p><div class="m5-footer-links"><a href="./index.html#m5">The LogiQ project journal →</a><button hidden id="m5-tracking-toggle" type="button" class="m5-privacy-settings">Disable analytics</button><span class="m5-tracking-notice">The published site uses PostHog for visit counts, clicks and masked session replay.</span></div></footer>
 </body>
 </html>

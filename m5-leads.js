@@ -9,43 +9,26 @@
   const status = document.getElementById('m5-form-status');
   const settings = window.LOGIQ_M5_CONFIG || {};
   const endpoint = String(settings.formspreeEndpoint || '').trim();
-  const configured = /^https:\/\/formspree\.io\/f\/[A-Za-z0-9]{6,}$/.test(endpoint);
+  const configured = settings.liveSite && /^https:\/\/formspree\.io\/f\/[A-Za-z0-9]{6,}$/.test(endpoint);
   let finished = false;
   let started = false;
 
-  // Only use short, safe campaign labels. Never put raw URLs or personal data in events.
-  function safeTag(value, fallback) {
-    if (typeof value !== 'string') return fallback;
-    return /^[a-zA-Z0-9_-]{1,50}$/.test(value) ? value : fallback;
+  for (const [property, value] of Object.entries(window.logiqM5Campaign || {})) {
+    const input = form.elements.namedItem(property);
+    if (input) input.value = value;
   }
-  const query = new URLSearchParams(location.search);
-  const campaignKeys = [
-    ['utm_source','m5-source','direct'],
-    ['utm_medium','m5-medium','none'],
-    ['utm_campaign','m5-campaign','m5_validation_2'],
-    ['utm_content','m5-content','default']
-  ];
-  campaignKeys.forEach(([param,id,fallback]) => {
-    const key = `logiq_${param}`;
-    const value = safeTag(query.get(param), '');
-    if (value) {
-      try { sessionStorage.setItem(key, value); } catch (_) { /* storage is optional */ }
-    }
-    let stored = '';
-    try { stored = sessionStorage.getItem(key) || ''; } catch (_) { /* storage is optional */ }
-    document.getElementById(id).value = safeTag(value || stored, fallback);
-  });
   function track(name, extra={}) {
-    if (window.logiqM5Analytics) window.logiqM5Analytics.track(name, extra);
+    window.logiqM5Analytics?.track(name, extra);
   }
   function showStatus(message, error=false) {
     status.textContent = message;
     status.classList.toggle('is-error', error);
   }
+  submit.disabled = !configured;
   if (!configured) {
-    submit.disabled = true;
     submit.setAttribute('aria-disabled', 'true');
-    showStatus('Early-access signups are not open yet. In the meantime, try the interactive prototype.');
+    showStatus(settings.liveSite ? 'Signups are unavailable. Please try again later.' :
+      'Preview only. Use the published LogiQ landing page to join the list.');
   }
   function noteStart() {
     if (!started) { started = true; track('lead_form_started'); }

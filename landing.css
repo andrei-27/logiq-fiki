@@ -43,8 +43,6 @@
 .m5-privacy-note {font-size:12px;line-height:1.7;color:var(--muted);border-top:1px solid var(--line);padding-top:17px;margin-top:18px}
 .m5-honeypot {position:absolute;left:-10000px;height:1px;width:1px;overflow:hidden}
 .m5-footer-links {display:flex;gap:18px;flex-wrap:wrap;align-items:center}
-.m5-privacy-settings {border:0;background:none;color:var(--muted);font:12px var(--mono);text-decoration:underline;text-underline-offset:4px;padding:5px 0}
-.m5-privacy-settings:hover {color:var(--violet)}
 .m5-tracking-notice {font-size:12px;line-height:1.5;color:var(--muted);max-width:350px}
 @media(max-width:920px){.m5-signup-section {grid-template-columns:1fr;gap:30px}.m5-signup-intro > p:not(.eyebrow) {max-width:700px}.m5-signup-card {max-width:680px}}
 @media(max-width:550px){.m5-signup-card {padding:24px 20px}.m5-footer-links {display:block}.m5-footer-links > * {display:block;margin-top:8px}.m5-signup-card h3 {font-size:28px}}

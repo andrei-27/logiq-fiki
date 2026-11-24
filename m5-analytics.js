@@ -4,10 +4,10 @@
   const config = window.LOGIQ_M5_CONFIG || {};
   const host = String(config.posthogApiHost || '').trim();
   const token = String(config.posthogProjectToken || '').trim();
-  const configured = /^phc_[A-Za-z0-9_-]{8,}$/.test(token) &&
+  const configured = config.liveSite && /^phc_[A-Za-z0-9_-]{8,}$/.test(token) &&
     /^https:\/\/(eu|us)\.i\.posthog\.com$/.test(host);
   const optOutKey = 'logiq_m5_tracking_disabled';
-  // Honor the visitor's choice for this tab even when browser storage is unavailable.
+  // Keep the current page's choice even if storage becomes unavailable.
   let sessionOptOut = null;
   const control = document.getElementById('m5-tracking-toggle');
   const events = [];
@@ -20,35 +20,32 @@
 
   const safeTag = (value, fallback) =>
     typeof value === 'string' && /^[a-zA-Z0-9_-]{1,50}$/.test(value) ? value : fallback;
-  const query = new URLSearchParams(location.search);
-  function campaignProps() {
-    const values = [['utm_source','campaign_source','direct'],['utm_medium','campaign_medium','none'],['utm_campaign','campaign_name','m5_validation_2'],['utm_content','campaign_content','default']];
-    const props = {};
-    for (const [name, property, fallback] of values) {
-      const fromUrl = safeTag(query.get(name), '');
-      if (fromUrl) {
-        try { sessionStorage.setItem('logiq_' + name, fromUrl); } catch (_) { /* optional */ }
-      }
-      let remembered = '';
-      try { remembered = sessionStorage.getItem('logiq_' + name) || ''; } catch (_) { /* optional */ }
-      props[property] = safeTag(fromUrl || remembered, fallback);
-    }
-    return props;
-  }
-  function disabled() {
+  function preference() {
     if (sessionOptOut !== null) return sessionOptOut;
-    try { return localStorage.getItem(optOutKey) === '1'; }
-    catch (_) { return false; }
+    let readable = false;
+    for (const storage of ['localStorage', 'sessionStorage']) {
+      try {
+        const choice = window[storage].getItem(optOutKey);
+        readable = true;
+        if (choice === '1' || choice === '0') return choice === '1';
+      } catch (_) { /* Try the other storage, else leave tracking off. */ }
+    }
+    return readable ? null : true;
   }
+  const disabled = () => preference() === true;
   function updateControl() {
     if (!control) return;
+    control.hidden = !configured;
     control.textContent = disabled() ? 'Enable analytics' : 'Disable analytics';
-    control.setAttribute('aria-pressed', String(disabled()));
+  }
+  function capture(name, properties) {
+    try { window.posthog.capture(name, properties); }
+    catch (_) { console.warn('LogiQ: analytics event unavailable.'); }
   }
   function track(name, props = {}) {
     if (!configured || disabled()) return;
-    const details = {...campaignProps(), page_type: pageType, ...props};
-    if (initialized && window.posthog?.capture) window.posthog.capture(name, details);
+    const details = {...window.logiqM5Campaign, page_type: pageType, ...props};
+    if (initialized && window.posthog?.capture) capture(name, details);
     else events.push([name, details]);
   }
   window.logiqM5Analytics = {track};
@@ -80,10 +77,14 @@
       });
       initialized = true;
       loading = false;
+      // The SDK can remember its own opt-out across reloads.
+      if (sessionOptOut === false || (preference() === false && window.posthog.has_opted_out_capturing?.())) {
+        window.posthog.opt_in_capturing?.();
+      }
       track('logiq_page_viewed');
       if (pageType === 'landing') track('landing_page_viewed');
       if (pageType === 'prototype') track('prototype_page_viewed');
-      for (const [name, properties] of events.splice(0)) window.posthog.capture(name, properties);
+      for (const [name, properties] of events.splice(0)) capture(name, properties);
     };
     script.onerror = () => { loading = false; events.length = 0; };
     document.head.appendChild(script);
@@ -92,10 +93,10 @@
   control?.addEventListener('click', () => {
     const shouldDisable = !disabled();
     sessionOptOut = shouldDisable;
-    try {
-      if (shouldDisable) localStorage.setItem(optOutKey, '1');
-      else localStorage.removeItem(optOutKey);
-    } catch (_) { /* opt out for current page still applies */ }
+    for (const storage of ['localStorage', 'sessionStorage']) {
+      try { window[storage].setItem(optOutKey, shouldDisable ? '1' : '0'); }
+      catch (_) { /* The current page's choice still applies. */ }
+    }
     if (shouldDisable) {
       events.length = 0;
       if (initialized) {
@@ -111,17 +112,26 @@
   updateControl();
   // Custom events supplement PostHog's automatic clicks, changes, and submissions.
   document.querySelectorAll('[data-m5-track]').forEach(link => link.addEventListener('click', () => {
-    track('landing_cta_clicked', {destination: safeTag(link.dataset.m5Track, 'other')});
+    track(pageType === 'prototype' ? 'prototype_cta_clicked' : 'landing_cta_clicked', {destination: safeTag(link.dataset.m5Track, 'other')});
   }));
   const signup = document.getElementById('early-access');
-  if (signup && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => {
-      if (entries.some(e => e.isIntersecting)) {
-        track('lead_form_viewed');
-        observer.disconnect();
-      }
-    }, {threshold: 0.25});
-    observer.observe(signup);
+  if (signup) {
+    let viewed = false;
+    let observer;
+    const markViewed = () => {
+      if (viewed || disabled()) return;
+      viewed = true;
+      track('lead_form_viewed');
+      observer?.disconnect();
+    };
+    signup.addEventListener('focus', markViewed, true);
+    signup.addEventListener('submit', markViewed, true);
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting)) markViewed();
+      });
+      observer.observe(signup);
+    }
   }
   loadAnalytics();
 })();

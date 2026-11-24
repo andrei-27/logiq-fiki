@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./m4.css?v=quiet-2">
 <link rel="stylesheet" href="./site-ui.css?v=responsive-1"><script src="./site.js?v=responsive-1" defer></script>  <script src="./m5-config.js" defer></script>
+  <script src="./m5-attribution.js" defer></script>
   <script src="./m5-analytics.js" defer></script>
 </head>
 <body>
@@ -48,8 +49,8 @@
           <div class="milestone-content"><div class="milestone-deliverables">
             <p>Invite readers to join the LogiQ early-access list, measure how visitors discover the landing page, and compare outreach channels using real conversion data.</p>
             <div class="milestone-links"><a href="./landing.html#early-access">Early-access signup →</a><a href="./m5-campaign.html">Campaign and measurement plan →</a><a href="./news.html">Try the prototype →</a></div>
-            <p><strong>Measurement plan:</strong> landing visitors → prototype clicks / form engagement → confirmed email signup. Source attribution uses campaign-specific links. PostHog measures visits and interactions automatically, with masked session replay and a visible opt-out control.</p>
-            <p class="small-note"><strong>Status:</strong> Formspree and PostHog are configured. Outreach evidence, real traffic and channel comparisons will be documented as the campaign runs.</p>
+            <p><strong>Measurement plan:</strong> landing visitors → signup section viewed → accepted signup. Prototype clicks are a separate exploration path. Source attribution uses campaign-specific links. PostHog measures visits and interactions automatically, with masked session replay and a visible opt-out control.</p>
+            <p class="small-note"><strong>Status:</strong> An <a href="./m5-campaign.html#baseline">unattributed baseline</a> is documented. Personal, university and online outreach results still need dated post evidence and channel counts.</p>
           </div><a class="text-link requirements-link" href="https://ocw.cs.pub.ro/courses/se/project/milestones/m5" target="_blank" rel="noopener noreferrer">Official M5 requirements <svg class="external-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
         </details>
         <details class="milestone"><summary><span class="milestone-number">M6</span><span class="milestone-title">Market research</span><span class="status">Planned</span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="milestone-content"><div class="milestone-deliverables"><p>Investigate named competitors, distribution channels, likely buyers, and willingness to pay. Separate sourced evidence from estimates.</p><p><strong>Evidence to add:</strong> competitor audit, market assumptions, and pricing experiments.</p></div><a class="text-link requirements-link" href="https://ocw.cs.pub.ro/courses/se/project/milestones/m6" target="_blank" rel="noopener noreferrer">Official M6 requirements <svg class="external-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div></details>
@@ -85,7 +86,7 @@
       <div class="advantage-note"><span class="eyebrow">OUR ADVANTAGE HYPOTHESIS</span><p>Useful explanations at the moment of reading can make critical thinking easier to practice. Clear language, contextual delivery, and progressive detail are our proposed differentiators.</p></div>
     </div></section>
 
-    <section id="metrics" class="container section metrics-section"><div class="section-heading"><p class="eyebrow">06 / DEFINING SUCCESS</p><h2>Measure understanding.<br><em>Not just attention.</em></h2><p>We want to learn whether LogiQ helps people think more clearly. These are proposed measures; no live usage data has been collected for this SE project.</p></div><div class="metrics-body"><div class="north-star"><span class="eyebrow">PROPOSED NORTH STAR</span><h3>Weekly readers who find an explanation useful.</h3><p>Count unique active readers who open an explanation and explicitly rate it as helpful during the week.</p></div><dl class="metric-list"><div><dt>Activation</dt><dd>Share of new users who read their first explanation.</dd></div><div><dt>Learning</dt><dd>Change in performance on comparable before-and-after news-checking exercises.</dd></div><div><dt>Quality</dt><dd>False-positive rate on a reviewed evaluation set; reader disagreement tracked separately.</dd></div><div><dt>Retention & friction</dt><dd>Week-four return rate, dismissals, and extension disablement.</dd></div></dl></div></section>
+    <section id="metrics" class="container section metrics-section"><div class="section-heading"><p class="eyebrow">06 / DEFINING SUCCESS</p><h2>Measure understanding.<br><em>Not just attention.</em></h2><p>We want to learn whether LogiQ helps people think more clearly. These learning measures are proposals. The M5 signup baseline tracks interest, not whether readers understand claims better.</p></div><div class="metrics-body"><div class="north-star"><span class="eyebrow">PROPOSED NORTH STAR</span><h3>Weekly readers who find an explanation useful.</h3><p>Count unique active readers who open an explanation and explicitly rate it as helpful during the week.</p></div><dl class="metric-list"><div><dt>Activation</dt><dd>Share of new users who read their first explanation.</dd></div><div><dt>Learning</dt><dd>Change in performance on comparable before-and-after news-checking exercises.</dd></div><div><dt>Quality</dt><dd>False-positive rate on a reviewed evaluation set; reader disagreement tracked separately.</dd></div><div><dt>Retention & friction</dt><dd>Week-four return rate, dismissals, and extension disablement.</dd></div></dl></div></section>
 
 
 
@@ -120,6 +121,6 @@
     </section>
 
   </main>
-  <footer class="container site-footer"><a class="wordmark" href="#">Logi<span>Q</span><span class="brand-dot">.</span></a><p>A critical-thinking copilot concept.<br>Student startup project · SE 2026–27</p><a href="#main">Back to top ↑</a></footer>
+  <footer class="container site-footer"><a class="wordmark" href="#">Logi<span>Q</span><span class="brand-dot">.</span></a><p>A critical-thinking copilot concept.<br>Student startup project · SE 2026–27</p><button hidden id="m5-tracking-toggle" type="button" class="m5-privacy-settings">Disable analytics</button><a href="#main">Back to top ↑</a></footer>
 </body>
 </html>

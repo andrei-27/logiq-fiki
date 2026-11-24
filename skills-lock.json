@@ -1,0 +1,50 @@
+{
+  "version": 2,
+  "skills": {
+    "break-ui": {
+      "source": "emilkowalski/skills",
+      "ref": "64eb3deb9a5fbfa041faf783e0bc3fd635872e9c",
+      "commit": "64eb3deb9a5fbfa041faf783e0bc3fd635872e9c",
+      "sourceType": "github",
+      "skillPath": "skills/break-ui/SKILL.md",
+      "computedHash": "f089f3663e197fb4e106249df70e815a96e3236520a2e1c0919d1694816baca8",
+      "installMode": "copy"
+    },
+    "caveman": {
+      "source": "JuliusBrussee/caveman",
+      "ref": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
+      "commit": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
+      "sourceType": "github",
+      "skillPath": "skills/caveman/SKILL.md",
+      "computedHash": "b51af74aacdadbc3c2d6bb79f05db58dc521854b87f7ffabd48faf286a81ed31",
+      "installMode": "copy"
+    },
+    "diagnosing-bugs": {
+      "source": "mattpocock/skills",
+      "ref": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
+      "commit": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/diagnosing-bugs/SKILL.md",
+      "computedHash": "87c78ae966e591f9ceb177789cc5cc9de69277cd26679ffd36ca5300f430d513",
+      "installMode": "copy"
+    },
+    "ui-ux-pro-max": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "ref": "a38d04c3d5c298c851dbe5e6ee1965ee3de42cb5",
+      "commit": "a38d04c3d5c298c851dbe5e6ee1965ee3de42cb5",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/ui-ux-pro-max/SKILL.md",
+      "computedHash": "13a8ebb151173889790c58cef48e15eff546b63d54e123a9fe8b4101c2f34ac0",
+      "installMode": "copy"
+    },
+    "unslop": {
+      "source": "heydamir/unslop",
+      "ref": "620163eedb3529d9cd23a3994ed8d287d06f760d",
+      "commit": "620163eedb3529d9cd23a3994ed8d287d06f760d",
+      "sourceType": "github",
+      "skillPath": "skills/unslop/SKILL.md",
+      "computedHash": "34b16270083f9892424a0b41dec4d5f25a73709c9cffa7702e57c723000e6df5",
+      "installMode": "copy"
+    }
+  }
+}
