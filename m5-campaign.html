@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f3ed">
-  <meta name="description" content="Share the LogiQ reading prototype, see the measured signup baseline, and compare outreach channels.">
+  <meta name="description" content="On 25 November, LogiQ recorded 29 opt-in form submissions and 60 tracked landing visitors. See the signup funnel, audience reach, and outreach evidence.">
   <title>M5 — Lead generation | LogiQ</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
@@ -21,41 +21,76 @@
   <header class="site-header global-header"><a class="wordmark" href="./index.html" aria-label="LogiQ project home">Logi<span>Q</span><span class="brand-dot">.</span></a><button type="button" class="menu-toggle" aria-expanded="false" aria-controls="global-nav" hidden>Menu <span aria-hidden="true">+</span></button><nav id="global-nav" aria-label="Main navigation"><a href="./index.html#journey">Project journal</a><a class="nav-cta" href="./news.html">Try LogiQ →</a></nav></header>
   <main id="main">
     <section class="container section m5-campaign-hero">
-      <p class="eyebrow">M5 / VALIDATION 2 · 26 NOVEMBER 2026</p>
-      <h1>Will readers sign up<br><em>to try LogiQ?</em></h1>
-      <p class="m5-campaign-intro">Readers can explore a sample news story without an account. For this experiment, we measure whether they also choose to leave an email for future testing.</p>
-      <div class="hero-actions"><a class="button button-dark" href="#share">Get the outreach links ↓</a><a class="text-link" href="#baseline">See the baseline ↓</a></div>
+      <p class="eyebrow">M5 / Campaign results · <time datetime="2026-11-25">25 November 2026</time></p>
+      <h1>Who joined the<br><em>LogiQ waitlist?</em></h1>
+      <p class="m5-campaign-intro">Anyone could try a sample news story without leaving an email. Personal invitations accounted for 10 of the 15 waitlist entries with a recorded outreach source. Another 14 had no source tag. These counts are before team and test exclusions.</p>
+      <dl class="m5-headlines">
+        <div><dt>Distinct opt-in addresses</dt><dd>29</dd></div>
+        <div><dt>Tracked landing visitors</dt><dd>60</dd></div>
+        <div><dt>Countries in landing analytics</dt><dd>4</dd></div>
+      </dl>
+      <nav class="m5-report-nav" aria-label="In this report"><a href="#results">Channel results</a><a href="#audience">Geography &amp; devices</a><a href="#share">Outreach evidence</a><a href="#method">Counting notes</a></nav>
     </section>
-    <section class="m5-campaign-tint" id="share" aria-labelledby="share-title"><div class="container section">
-      <div class="section-heading"><p class="eyebrow">01 / Outreach</p><h2 id="share-title">One page. Three ways to share it.</h2><p>Copy the link for the audience you are inviting. Each opens the same landing page; the tag identifies the channel, not the person. Avoid including names or email addresses in links.</p></div>
-      <div class="steps-grid m5-campaign-steps">
-        <article><h3>Personal</h3><p>For friends or contacts who already check the news they read.</p><a class="text-link" href="https://andrei-27.github.io/logiq-fiki/landing.html?utm_source=personal&amp;utm_medium=message&amp;utm_campaign=m5_validation_2">Personal invitation link →</a></article>
-        <article><h3>University</h3><p>For a student group, society or class forum that welcomes project invitations.</p><a class="text-link" href="https://andrei-27.github.io/logiq-fiki/landing.html?utm_source=university&amp;utm_medium=community&amp;utm_campaign=m5_validation_2">University invitation link →</a></article>
-        <article><h3>Online</h3><p>For a relevant public community or social post. Follow the community’s posting rules.</p><a class="text-link" href="https://andrei-27.github.io/logiq-fiki/landing.html?utm_source=online&amp;utm_medium=social&amp;utm_campaign=m5_validation_2">Online invitation link →</a></article>
-      </div>
-      <aside class="m5-measurement-intro" aria-label="Suggested invitation"><h3>An invitation you can use</h3><p>“How do you check a headline before sharing it? We’re students building LogiQ. Try a sample story and see the source behind a claim. No account needed. If you’d like to test the next version, you can leave your email.” Add the link for your channel.</p></aside>
+
+    <section id="funnel" class="m5-campaign-tint" aria-labelledby="funnel-title"><div class="container section">
+      <div class="section-heading"><p class="eyebrow">01 / Visitor behavior</p><h2 id="funnel-title">Where did readers stop?</h2></div>
+      <ol class="m5-funnel" aria-label="Ordered PostHog funnel">
+        <li><div><strong>60</strong> Visited the landing page</div><meter min="0" max="60" value="60" aria-hidden="true"></meter><span>100% of entrants</span></li>
+        <li><div><strong>45</strong> Saw the signup form</div><meter min="0" max="60" value="45" aria-hidden="true"></meter><span>75% of entrants</span></li>
+        <li><div><strong>11</strong> Reached signup success</div><meter min="0" max="60" value="11" aria-hidden="true"></meter><span>18.3% of entrants</span></li>
+      </ol>
+      <p class="m5-reading"><strong>The largest drop was after the form came into view:</strong> 34 of the 45 form viewers did not record a success within one hour of landing. Seeing the form doesn’t mean starting it; the data do not tell us why they stopped.</p>
+      <p class="m5-source-note">PostHog Web Analytics recorded 87 landing pageviews in 71 sessions on the same date. A repeat view is not another visitor. Trying the prototype was optional and is not a funnel step.</p>
     </div></section>
-    <section class="container section m5-campaign-results" id="baseline" aria-labelledby="baseline-title">
-      <div class="section-heading"><p class="eyebrow">02 / Baseline · <time datetime="2026-11-24">24 November 2026</time></p><h2 id="baseline-title">One of two tracked visitors reached signup success.</h2><p>These team-provided screenshots show that the tools received data. They do not establish how many external readers joined or which channel works best.</p></div>
-      <div class="m5-evidence-grid">
-        <figure><h3>PostHog: people in the funnel</h3><a href="./assets/m5/posthog-baseline.png"><img width="850" height="732" loading="lazy" src="./assets/m5/posthog-baseline.png" alt="PostHog funnel: 2 landing visitors, 2 viewed the signup section, 1 reached signup success. Open full image."></a><figcaption>Last 30 days in the snapshot: 1 of 2 tracked visitors completed the funnel. Seeing the form does not mean starting it.</figcaption></figure>
-        <figure><h3>Formspree: accepted submissions</h3><a href="./assets/m5/formspree-baseline.png"><img width="1000" height="116" loading="lazy" src="./assets/m5/formspree-baseline.png" alt="Two accepted rows with consent and direct source; private columns removed. Open full image."></a><figcaption>Both rows shown are <code>direct / none</code>. Submissions are not unique people. Repeat entries, team tests and visitors without analytics can make the tools disagree. Neither row is attributed to the outreach links above.</figcaption></figure>
-      </div>
-    </section>
-    <section class="m5-campaign-tint" id="results" aria-labelledby="results-title"><div class="container section m5-campaign-decisions">
-      <p class="eyebrow">03 / Channel comparison</p><h2 id="results-title">Where did readers come from?</h2>
-      <p>Post dates and channel-level counts have not been supplied yet. A dash means <strong>not reported</strong>, not zero.</p>
-      <table class="m5-results-table"><caption>Outreach evidence, excluding team and test traffic</caption>
-        <thead><tr><th scope="col">Source</th><th scope="col">Dated post or evidence</th><th scope="col">Landing visitors</th><th scope="col">Tracked successes</th><th scope="col">Distinct opt-in leads</th></tr></thead>
+
+    <section class="container section" id="results" aria-labelledby="results-title">
+      <div class="section-heading"><p class="eyebrow">02 / Channel comparison</p><h2 id="results-title">University links reached more readers.<br><em>Personal links brought more tagged signups.</em></h2></div>
+      <div class="m5-table-wrap"><table class="m5-results-table">
+        <caption>25 November · PostHog counts tracked visitors; Formspree counts distinct consenting addresses.</caption>
+        <thead><tr><th scope="col">Recorded source</th><th scope="col">Landing visitors</th><th scope="col">Form viewers</th><th scope="col">Tracked successes</th><th scope="col">Tracked rate</th><th scope="col">Formspree addresses</th></tr></thead>
         <tbody>
-          <tr><th scope="row">Personal</th><td>Not documented</td><td>—</td><td>—</td><td>—</td></tr>
-          <tr><th scope="row">University</th><td>Not documented</td><td>—</td><td>—</td><td>—</td></tr>
-          <tr><th scope="row">Online</th><td>Not documented</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><th scope="row">Personal</th><td>15</td><td>13</td><td>8</td><td>53.3%</td><td>10</td></tr>
+          <tr><th scope="row">University</th><td>46</td><td>32</td><td>4</td><td>8.7%</td><td>3</td></tr>
+          <tr><th scope="row">Online</th><td>2</td><td>0</td><td>0</td><td>0%</td><td>2</td></tr>
+          <tr><th scope="row">Direct / unknown</th><td>2</td><td>2</td><td>0</td><td>0%</td><td>14</td></tr>
+          <tr class="m5-overall"><th scope="row">Overall, deduplicated</th><td>60</td><td>45</td><td>11</td><td>18.3%</td><td>29</td></tr>
         </tbody>
-      </table>
-      <div class="m5-evidence-grid"><article><h3>Keep proof of distribution</h3><p>Record the time in Europe/Bucharest, the exact tagged link, the published post permalink and a redacted screenshot. For private messages, keep the invitation count and date without naming recipients.</p></article><article><h3>Compare like with like</h3><p>Use one reporting window for all three channels. Show PostHog successes / unique tracked landing visitors, and separately count distinct consenting, non-test addresses in Formspree. Keep <code>direct</code> traffic separate. Record one observed behavior from a masked replay, if available.</p></article></div>
-      <p class="m5-campaign-status"><strong>Decision:</strong> No winning channel yet. Once evidence is available, compare both lead volume and tracked rate, show their denominators, and choose which invitation to repeat. A signup is not a sale.</p>
-      <a class="text-link" href="./landing.html">View the customer-facing landing page →</a>
+      </table></div>
+      <p class="m5-source-note">Tracked rate = ordered signup successes ÷ landing visitors for that row. A visitor can enter through more than one tagged link: PostHog’s channel rows overlap, so the overall row is a separate query, not a sum. Each of the 29 addresses appears once in the 25 November export rows.</p>
+      <p class="m5-reading"><strong>What we would repeat:</strong> send personal invitations to recruit the next testers, and use university groups for reach. With just two tracked online entrants and 14 unassigned form entries, we cannot rank every signup or conclude that online outreach failed.</p>
+    </section>
+
+    <section id="audience" class="m5-campaign-tint" aria-labelledby="audience-title"><div class="container section">
+      <div class="section-heading"><p class="eyebrow">03 / Audience reach</p><h2 id="audience-title">Mostly Romania, with visits elsewhere in Europe.</h2></div>
+      <div class="m5-evidence-grid">
+        <article><h3>Where the landing page was opened</h3><p>PostHog associated <strong>58</strong> tracked visitors with Romania. France, Ireland and the United Kingdom appeared with <strong>one each</strong>. Counts are unique within each country: they sum to 61 country observations, not 61 different visitors.</p></article>
+        <article><h3>How readers opened it</h3><p><strong>50 of 60</strong> tracked landing visitors used a mobile device (83.3%); 10 used desktop. We would test the form on a phone first when changing the invitation.</p></article>
+      </div>
+      <p class="m5-source-note">Countries are approximate IP locations at the time of a visit. They are not subscribers’ countries, nationalities or places of residence. We did not collect age, gender or occupation; a university tag describes a link, not proof that the visitor is a student.</p>
+    </div></section>
+
+    <section id="share" class="container section" aria-labelledby="share-title">
+      <div class="section-heading"><p class="eyebrow">04 / Outreach evidence</p><h2 id="share-title">What we actually sent</h2><p>Both invitations offered the same ungated prototype and optional waitlist. The screenshots document the messages and their tags, not their reach or which recipients signed up.</p></div>
+      <div class="m5-evidence-grid">
+        <figure><h3>WhatsApp · university</h3><a href="./assets/m5/university-invitation.png"><img width="744" height="153" loading="lazy" src="./assets/m5/university-invitation.png" alt="Romanian WhatsApp invitation to try LogiQ and optionally leave an email; the link contains the university and community tags."></a><figcaption>The university invitation is tagged <code>university / community</code>. No private chat or recipient details are linked.</figcaption></figure>
+        <figure><h3>Online outreach · Reddit message</h3><a href="./assets/m5/online-invitation.png"><img width="1105" height="206" loading="lazy" src="./assets/m5/online-invitation.png" alt="English invitation to try the prototype, with an online and social tagged link and a preview of the LogiQ landing page."></a><figcaption>The team identifies this as its Reddit message. Its link is tagged <code>online / social</code>, not Reddit-specific. No public post permalink or publication date was supplied; earlier signups cannot be attributed to this screenshot.</figcaption></figure>
+      </div>
+      <p class="m5-source-note">Personal invitations used a separate message tag. Their counts are shown above; no private personal conversation is published.</p>
+      <nav class="m5-report-nav" aria-label="Original campaign links"><a href="https://andrei-27.github.io/logiq-fiki/landing.html?utm_source=personal&amp;utm_medium=message&amp;utm_campaign=m5_validation_2">Personal invitation link</a><a href="https://andrei-27.github.io/logiq-fiki/landing.html?utm_source=university&amp;utm_medium=community&amp;utm_campaign=m5_validation_2">University invitation link</a><a href="https://andrei-27.github.io/logiq-fiki/landing.html?utm_source=online&amp;utm_medium=social&amp;utm_campaign=m5_validation_2">Online invitation link</a></nav>
+    </section>
+
+    <section id="method" class="m5-campaign-tint" aria-labelledby="method-title"><div class="container section">
+      <div class="section-heading"><p class="eyebrow">05 / Counting notes</p><h2 id="method-title">Why 29 addresses and 11 tracked successes?</h2></div>
+      <div class="m5-evidence-grid">
+        <article><h3>Formspree: the waitlist</h3><p>The supplied export contains <strong>31 distinct addresses with consent checked</strong> on 24–25 November: two direct baseline rows dated the 24th and 29 dated the 25th. Addresses were compared case-insensitively. Across both dates the tags are personal 10, university 3, online 2 and direct 16.</p><p>The 14 direct entries on the 25th arrived within ten minutes. There is no source evidence for them. At least one of the day’s 29 addresses belongs to the project team; the export does not identify every test. We report submissions, not a verified external customer count.</p></article>
+        <article><h3>PostHog: observed behavior</h3><p>25 November, midnight to midnight in Europe/Bucharest. The funnel uses the published landing page, campaign <code>m5_validation_2</code>, traffic classified as regular, and the project’s internal/test-account filter. It counts unique visitors who landed, saw the form and reached success in order, within one hour. Channel is the source at entry.</p><p>Tracking can be blocked or disabled; one visitor can also submit more than one address. The systems are not joined by email. Dividing 29 by 60 would mix two populations and is not the conversion rate. These filters cannot certify that every visit was an independent reader.</p></article>
+      </div>
+      <details id="baseline" class="m5-baseline"><summary>24 November: earlier instrumentation baseline</summary>
+        <div class="m5-evidence-grid">
+          <figure><a href="./assets/m5/posthog-baseline.png"><img width="850" height="732" loading="lazy" src="./assets/m5/posthog-baseline.png" alt="Earlier PostHog snapshot: 2 tracked landing visitors, 2 form viewers, 1 signup success."></a><figcaption>Snapshot taken on 24 November with a last-30-days filter. Not added to the campaign-day funnel.</figcaption></figure>
+          <figure><a href="./assets/m5/formspree-baseline.png"><img width="1000" height="116" loading="lazy" src="./assets/m5/formspree-baseline.png" alt="Redacted baseline showing two direct Formspree submissions with consent."></a><figcaption>Two direct submissions on 24 November. Included in the 31-row export, excluded from the 29 campaign-day addresses.</figcaption></figure>
+        </div>
+      </details>
     </div></section>
   </main>
   <footer class="container site-footer"><a class="wordmark" href="./index.html">Logi<span>Q</span><span class="brand-dot">.</span></a><p>A student project about evidence and curiosity.<br>Milestone 5 · Lead generation</p><button hidden id="m5-tracking-toggle" type="button" class="m5-privacy-settings">Disable analytics</button><a href="./index.html#m5">Back to milestone 5 →</a></footer>
